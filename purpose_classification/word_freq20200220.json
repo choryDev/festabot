@@ -1,0 +1,590 @@
+[
+	{
+		"freq_words": [
+			{
+				"word": "\uc720\uc131\uc628\ucc9c",
+				"count": 565
+			},
+			{
+				"word": "\uccb4\ud5d8",
+				"count": 232
+			},
+			{
+				"word": "\uc720\uc131",
+				"count": 221
+			},
+			{
+				"word": "\uc628\ucc9c",
+				"count": 219
+			},
+			{
+				"word": "\ubd80\uc2a4",
+				"count": 152
+			},
+			{
+				"word": "\uacf5\uc5f0",
+				"count": 144
+			},
+			{
+				"word": "\uc871\uc695",
+				"count": 127
+			},
+			{
+				"word": "\uac70\ub9ac",
+				"count": 127
+			},
+			{
+				"word": "\ud37c\ub808\uc774\ub4dc",
+				"count": 105
+			},
+			{
+				"word": "\ucc9c\uc218",
+				"count": 104
+			},
+			{
+				"word": "\uc720\uc131\uad6c",
+				"count": 95
+			},
+			{
+				"word": "\uc544\uc774",
+				"count": 90
+			},
+			{
+				"word": "\uac11\ucc9c",
+				"count": 89
+			},
+			{
+				"word": "\uc9c4\ud589",
+				"count": 87
+			},
+			{
+				"word": "\uac1c\ub9c9\uc2dd",
+				"count": 87
+			},
+			{
+				"word": "\ubb3c\ucd1d",
+				"count": 84
+			},
+			{
+				"word": "\ubaa8\uc2b5",
+				"count": 75
+			},
+			{
+				"word": "\uc2a4\ud30c",
+				"count": 75
+			},
+			{
+				"word": "\uacc4\ub8e1",
+				"count": 71
+			},
+			{
+				"word": "\ubb34\ub300",
+				"count": 71
+			},
+			{
+				"word": "\ucea0\ud551",
+				"count": 58
+			},
+			{
+				"word": "\uba39\uac70\ub9ac",
+				"count": 56
+			},
+			{
+				"word": "\uac00\uc871",
+				"count": 56
+			},
+			{
+				"word": "\ubd88\uaf43",
+				"count": 52
+			},
+			{
+				"word": "\uc8fc\ubbfc",
+				"count": 48
+			},
+			{
+				"word": "\ubd88\uaf43\ub180\uc774",
+				"count": 48
+			},
+			{
+				"word": "\uc778\uae30",
+				"count": 46
+			},
+			{
+				"word": "\ub300\ucca9",
+				"count": 45
+			},
+			{
+				"word": "\ub300\ud45c",
+				"count": 45
+			},
+			{
+				"word": "\uac00\uc218",
+				"count": 44
+			},
+			{
+				"word": "\uc6b4\uc601",
+				"count": 43
+			},
+			{
+				"word": "\uc704\ud574",
+				"count": 43
+			},
+			{
+				"word": "\ubaa8\ub450",
+				"count": 42
+			},
+			{
+				"word": "\uc544\ub798",
+				"count": 40
+			},
+			{
+				"word": "\ucd95\ud558\uacf5\uc5f0",
+				"count": 38
+			},
+			{
+				"word": "\ud559\uc0dd",
+				"count": 38
+			},
+			{
+				"word": "\ud30c\ud2f0",
+				"count": 38
+			},
+			{
+				"word": "\uac74\uac15",
+				"count": 37
+			},
+			{
+				"word": "\uad11\uc7a5",
+				"count": 35
+			},
+			{
+				"word": "\ub9c8\uc9c0\ub9c9",
+				"count": 35
+			},
+			{
+				"word": "\ubcfc\uac70\ub9ac",
+				"count": 35
+			},
+			{
+				"word": "\ub354\uc6b1",
+				"count": 35
+			},
+			{
+				"word": "\ub3d9\uc548",
+				"count": 34
+			},
+			{
+				"word": "\ub9c8\ub828",
+				"count": 33
+			},
+			{
+				"word": "\uc624\ud6c4",
+				"count": 33
+			},
+			{
+				"word": "\uc774\ud31d\ub098\ubb34",
+				"count": 33
+			},
+			{
+				"word": "\ud31d\uaf43",
+				"count": 33
+			},
+			{
+				"word": "\ud589\ub82c",
+				"count": 33
+			},
+			{
+				"word": "\uac00\uc7a5",
+				"count": 32
+			},
+			{
+				"word": "\uacfc\ud559",
+				"count": 32
+			},
+			{
+				"word": "\uc124\uce58",
+				"count": 32
+			},
+			{
+				"word": "\ucd94\uc5b5",
+				"count": 32
+			},
+			{
+				"word": "\uc800\ub141",
+				"count": 31
+			},
+			{
+				"word": "\ub9c8\uc74c",
+				"count": 30
+			},
+			{
+				"word": "\ub0a0\uc528",
+				"count": 30
+			},
+			{
+				"word": "\uc5b4\ub9b0\uc774",
+				"count": 29
+			},
+			{
+				"word": "\uc8fc\ubcc0",
+				"count": 29
+			},
+			{
+				"word": "\uba54\uc778",
+				"count": 29
+			},
+			{
+				"word": "\uc5ed\uc2dc",
+				"count": 28
+			},
+			{
+				"word": "\ud604\uc7a5",
+				"count": 28
+			},
+			{
+				"word": "\ub0b4\ub144",
+				"count": 27
+			},
+			{
+				"word": "\ub3c4\uc2dc",
+				"count": 27
+			},
+			{
+				"word": "\uc9c4\uc9dc",
+				"count": 27
+			},
+			{
+				"word": "\ud558\ub298",
+				"count": 27
+			},
+			{
+				"word": "\uc990\uac70\uc6c0",
+				"count": 26
+			},
+			{
+				"word": "\uac1c\ub9c9",
+				"count": 26
+			},
+			{
+				"word": "\uacf5\uc6d0",
+				"count": 26
+			},
+			{
+				"word": "\uce5c\uad6c",
+				"count": 26
+			},
+			{
+				"word": "\ub178\ub798",
+				"count": 25
+			},
+			{
+				"word": "\uc8fc\uc81c",
+				"count": 25
+			}
+		],
+		"id": 1608,
+		"region": "\ub300\uc804"
+	},
+	{
+		"freq_words": [
+			{
+				"word": "\uc544\ud2b8",
+				"count": 880
+			},
+			{
+				"word": "\ud790\ub9c1",
+				"count": 653
+			},
+			{
+				"word": "\uc11c\uad6c",
+				"count": 535
+			},
+			{
+				"word": "\uacf5\uc6d0",
+				"count": 283
+			},
+			{
+				"word": "\uccb4\ud5d8",
+				"count": 200
+			},
+			{
+				"word": "\uacf5\uc5f0",
+				"count": 163
+			},
+			{
+				"word": "\ubcf4\ub77c\ub9e4",
+				"count": 161
+			},
+			{
+				"word": "\uba38\ub9ac",
+				"count": 135
+			},
+			{
+				"word": "\uc791\ud488",
+				"count": 127
+			},
+			{
+				"word": "\ud130\ub110",
+				"count": 124
+			},
+			{
+				"word": "\ubb34\ub300",
+				"count": 123
+			},
+			{
+				"word": "\uc608\uc220",
+				"count": 118
+			},
+			{
+				"word": "\ub9c8\ucf13",
+				"count": 113
+			},
+			{
+				"word": "\uc544\uc774",
+				"count": 104
+			},
+			{
+				"word": "\uc9c4\ud589",
+				"count": 103
+			},
+			{
+				"word": "\uc11c\uad6c\uccad",
+				"count": 101
+			},
+			{
+				"word": "\ubd80\uc2a4",
+				"count": 99
+			},
+			{
+				"word": "\uc791\uac00",
+				"count": 80
+			},
+			{
+				"word": "\uac00\uc871",
+				"count": 76
+			},
+			{
+				"word": "\uac70\ub9ac",
+				"count": 73
+			},
+			{
+				"word": "\uac1c\ub9c9\uc2dd",
+				"count": 67
+			},
+			{
+				"word": "\ubaa8\uc2b5",
+				"count": 66
+			},
+			{
+				"word": "\uba39\uac70\ub9ac",
+				"count": 65
+			},
+			{
+				"word": "\uc804\uc11c\uad6c",
+				"count": 62
+			},
+			{
+				"word": "\ubd88\uaf43\ub180\uc774",
+				"count": 62
+			},
+			{
+				"word": "\ud2b8\ub9ac",
+				"count": 61
+			},
+			{
+				"word": "\ub300\ud68c",
+				"count": 60
+			},
+			{
+				"word": "\uc870\uba85",
+				"count": 58
+			},
+			{
+				"word": "\uc124\uce58",
+				"count": 58
+			},
+			{
+				"word": "\uc804\uc2dc",
+				"count": 56
+			},
+			{
+				"word": "\ubcfc\uac70\ub9ac",
+				"count": 54
+			},
+			{
+				"word": "\uac00\uc218",
+				"count": 52
+			},
+			{
+				"word": "\uc800\ub141",
+				"count": 49
+			},
+			{
+				"word": "\uba54\uc778",
+				"count": 49
+			},
+			{
+				"word": "\ud3ec\ud1a0",
+				"count": 47
+			},
+			{
+				"word": "\ub098\ubb34",
+				"count": 47
+			},
+			{
+				"word": "\ub9cc\ub4e4\uae30",
+				"count": 45
+			},
+			{
+				"word": "\uc704\ud574",
+				"count": 44
+			},
+			{
+				"word": "\ucf00\uc774\ud06c",
+				"count": 41
+			},
+			{
+				"word": "\ub354\uc6b1",
+				"count": 41
+			},
+			{
+				"word": "\uc77c\uac04",
+				"count": 41
+			},
+			{
+				"word": "\uc5ec\ub7ec\ubd84",
+				"count": 38
+			},
+			{
+				"word": "\uce5c\uad6c",
+				"count": 38
+			},
+			{
+				"word": "\uc8fc\ub9d0",
+				"count": 37
+			},
+			{
+				"word": "\ubaa8\ub450",
+				"count": 37
+			},
+			{
+				"word": "\ub300\ud45c",
+				"count": 37
+			},
+			{
+				"word": "\ubd88\uaf43",
+				"count": 37
+			},
+			{
+				"word": "\uac00\uc7a5",
+				"count": 36
+			},
+			{
+				"word": "\uc6b4\uc601",
+				"count": 36
+			},
+			{
+				"word": "\uc544\ub798",
+				"count": 35
+			},
+			{
+				"word": "\uc785\uad6c",
+				"count": 35
+			},
+			{
+				"word": "\uc870\ud615",
+				"count": 35
+			},
+			{
+				"word": "\ud478\ub4dc",
+				"count": 35
+			},
+			{
+				"word": "\ub54c\ubb38",
+				"count": 35
+			},
+			{
+				"word": "\ud310\ub9e4",
+				"count": 35
+			},
+			{
+				"word": "\ud2b8\ub7ed",
+				"count": 34
+			},
+			{
+				"word": "\ud604\uc7a5",
+				"count": 34
+			},
+			{
+				"word": "\ud504\ub9ac",
+				"count": 33
+			},
+			{
+				"word": "\uac10\uc0c1",
+				"count": 33
+			},
+			{
+				"word": "\ub9c8\uc9c0\ub9c9",
+				"count": 33
+			},
+			{
+				"word": "\ub304\uc2a4",
+				"count": 33
+			},
+			{
+				"word": "\uc18c\uac1c",
+				"count": 33
+			},
+			{
+				"word": "\uc5ed\uc2dc",
+				"count": 33
+			},
+			{
+				"word": "\ud1b5\uc81c",
+				"count": 32
+			},
+			{
+				"word": "\uac00\uc9c0",
+				"count": 32
+			},
+			{
+				"word": "\uadf8\ub9bc",
+				"count": 32
+			},
+			{
+				"word": "\uc9c1\uc811",
+				"count": 31
+			},
+			{
+				"word": "\uc790\ub2e8",
+				"count": 31
+			},
+			{
+				"word": "\uc624\ud6c4",
+				"count": 31
+			},
+			{
+				"word": "\uac1c\ucd5c",
+				"count": 31
+			},
+			{
+				"word": "\ub9c8\uc74c",
+				"count": 29
+			},
+			{
+				"word": "\ud45c\ud604",
+				"count": 29
+			},
+			{
+				"word": "\uc774\ubca4\ud2b8",
+				"count": 29
+			},
+			{
+				"word": "\uc54c\ub9bc",
+				"count": 29
+			}
+		],
+		"id": 1902,
+		"region": "\ub300\uc804"
+	}
+]
