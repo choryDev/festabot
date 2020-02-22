@@ -6,7 +6,7 @@ from fasttext import load_model as load_ft_model
 from sklearn.preprocessing import normalize
 
 from soynlp.hangle import compose, character_is_korean
-from preprocess import get_tokenizer, jamo_sentence
+from .preprocess import get_tokenizer, jamo_sentence
 
 class WordEmbeddingEvaluator:
 
