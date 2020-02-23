@@ -1,10 +1,21 @@
 
 class Ui:
-    def festa_list_ui(self, festa_list, another_festa_list, word):
-        print(festa_list)
+    def none_festa_list_ui(self, word):
+        send_data = {
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                    {
+                        "simpleText": {
+                            "text": word + "에 대한 축제 정보를 못찾겠습니다. ㅠㅠ"
+                        }
+                    }
+                ]
+            }
+        }
+        return send_data
 
-        print("하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 ")
-        print(another_festa_list)
+    def festa_list_ui(self, festa_list, another_festa_list, word):
         item_list = []
         btn_list = []
         i = 0
@@ -56,3 +67,5 @@ class Ui:
             }
         }
         return send_data
+
+

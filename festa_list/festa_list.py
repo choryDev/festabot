@@ -28,10 +28,11 @@ class FestaList:
         query = 'select * from (select * from festival_tb where enddate > sysdate()) A where '\
                 + where_query[0:len(where_query) - 3]  #현재 시간 기준으로 끝나지 않은 축제만 보여줘야 함
         db_obj = DBconncter().select_query(query)
-        print("하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 ")
-        print(query)
-        print(db_obj)
-        return Ui().festa_list_ui(db_obj[0:5], db_obj[5:], word[0:len(word) - 1])
+
+        if len(db_obj) == 0:
+            return Ui().none_festa_list_ui(word[0:len(word) - 1])
+        else:
+            return Ui().festa_list_ui(db_obj[0:5], db_obj[5:], word[0:len(word) - 1])
 
     def main_func(self): #형태소 겟수 세는 함수
         okt = Okt()
