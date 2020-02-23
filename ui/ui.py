@@ -1,6 +1,10 @@
 
 class Ui:
     def festa_list_ui(self, festa_list, another_festa_list, word):
+        print(festa_list)
+
+        print("하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 하이 ")
+        print(another_festa_list)
         item_list = []
         btn_list = []
         i = 0
@@ -15,9 +19,9 @@ class Ui:
                        },
                    },
             btn = {
-                        "label": i,
+                        "label": i + '번 축제',
                         "action": "block",
-                        "blockId": "5d655d8392690d000180f9ff",
+                        "blockId": "5e50dad192690d00014efe09",
                           "extra": {
                               "id": v[0],
                           }

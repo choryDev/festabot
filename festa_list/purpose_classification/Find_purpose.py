@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from common.DBconncter import DBconncter
 from ui.ui import Ui
 
