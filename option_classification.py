@@ -6,11 +6,13 @@ class Optionclassification:
         self.sentence = requset_obj['userRequest']['utterance']
 
     def option_classification(self):
-        if self.sentence == "주차장":
+        if self.sentence == "주소":
+            return Option(self.requset_obj).get_addr()    
+        elif self.sentence == "주차장":
             return Option(self.requset_obj).get_parkinglot()
         elif self.sentence == "날씨":
-            print("weather")
-        elif self.sentence == "주소":
-            return Option(self.requset_obj).get_addr()
+            return Option(self.requset_obj).get_weather()
+        elif self.sentence == "맛집":
+            return Option(self.requset_obj).get_restaurant()
         else:
-            print("재입력")
+            print("[SERVER] 재입력바랍니다")

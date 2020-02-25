@@ -17,3 +17,11 @@ class DBconncter:
 
         return data
 
+    def insert_query(self, query):
+        conn = pymysql.connect(host=host, user=user,
+                               password=password, db=db, charset='utf8')
+        curs = conn.cursor()
+        sql = query #파라미터로 쿼리를 넣음
+        curs.execute(sql)
+        conn.commit()
+        conn.close()

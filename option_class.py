@@ -1,4 +1,8 @@
-import pymysql
+# -*- coding: utf-8 -*-
+import pymysql, os, sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './kakao_map_api')))
+from get_restaurant_api import test
 
 host='mydb.cstof8mab94c.ap-northeast-2.rds.amazonaws.com'
 user = 'admin'
@@ -11,7 +15,7 @@ class Option:
         self.requset_obj = requset_obj
         self.sentence = requset_obj['userRequest']['utterance']
 
-    def get_addr(self):
+    def get_addr(self): #축제 주소 조회
         conn = pymysql.connect(host=host, user = user, 
                        password=password , db=db, charset=charset)
 
@@ -60,7 +64,7 @@ class Option:
         }
         return dataSend
     
-    def get_parkinglot(self):
+    def get_parkinglot(self): #주차장 조회
         conn = pymysql.connect(host=host, user = user, 
                        password=password , db=db, charset=charset)
 
@@ -89,6 +93,11 @@ class Option:
                         "action": "webLink",
                         "label": "카카오맵 주변 주차장 검색",
                         "webLinkUrl": "daummaps://search?q=주차장&p=" + str(datalist[3]) + "," + str(datalist[4])	
+                        },
+                        {
+                        "action": "message",
+                        "label": "카드형으로 검색",
+                        "messageText" : "test"
                         }
                     ]
                     }
@@ -97,3 +106,10 @@ class Option:
             }
         }
         return dataSend
+
+    def get_weather(self):
+        print("[SERVER] Received '날씨'")
+    
+    def get_restaurant(self):
+
+        test()

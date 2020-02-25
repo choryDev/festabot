@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from purpose_classification.Find_purpose import Find_purpose
 from purpose_classification.word2vec.word2vec_obj import Word2vecObj
+from festa_description.festa_description import FestaDescription
 from festa_list import FestaList
+from ui.ui import Ui
 import sys
 app = Flask(__name__)
 
@@ -17,11 +19,6 @@ def Keyboard():
 @app.route('/message', methods=['POST'])
 def Message():
     req = request.get_json()
-    # req = req['userRequest']
-    # content = req['utterance']
-    # user = req['user']['id']
-
-    # dataSend = Find_purpose(word2vec).find_purpose_first(content)
     dataSend = FestaList(req).main_func()
     return jsonify(dataSend)
 
@@ -29,15 +26,14 @@ def Message():
 def Btn_more_festa_list():
     req = request.get_json()
     other_festa_list = req['action']["clientExtra"]["another_festa_list"]
-    dataSend = Find_purpose(word2vec).db_query_list(other_festa_list)
+    word = req['action']["clientExtra"]["word"]
+    dataSend = Ui().festa_list_ui(other_festa_list[0:5], other_festa_list[5:], word)
     return jsonify(dataSend)
 
 @app.route('/festa_description', methods=['POST'])
 def festa_description():
     req = request.get_json()
-    other_festa_list = req['action']["clientExtra"]["another_festa_list"]
-    content = ""
-    dataSend = Find_purpose(word2vec).db_query_list(other_festa_list)
+    dataSend = FestaDescription().main(req)
     return jsonify(dataSend)
 
 if __name__ == "__main__":
