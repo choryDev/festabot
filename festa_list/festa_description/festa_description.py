@@ -16,8 +16,5 @@ class FestaDescription:
 
         #사용자가 조회 한 것을 넣는 쿼리
         user_token = req['userRequest']['user']['properties']['plusfriendUserKey']
-        print(user_token+'유저 토큰')
-        query = "INSERT INTO user_tb VALUES (user_token, id, NOW());"
-        DBconncter().insert_query(query)
-
+        DBconncter().insert_festa_desc_query(user_token, id)
         return Ui().festa_description(db_obj[0])

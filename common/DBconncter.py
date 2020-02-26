@@ -17,11 +17,18 @@ class DBconncter:
 
         return data
 
-    def insert_query(self, query):
+    def insert_festa_desc_query(self, user_token, id):
+        select_query = "select * from user_tb where user_token = '"+user_token+"'"
+        db_obj = DBconncter.select_query('', select_query)
         conn = pymysql.connect(host=host, user=user,
                                password=password, db=db, charset='utf8')
         curs = conn.cursor()
-        sql = query #파라미터로 쿼리를 넣음
-        curs.execute(sql)
+        if len(db_obj) == 0:
+            sql = "insert into user_tb values (%s, %s, NOW())"
+            curs.execute(sql, (user_token, id))
+        else:
+            sql = "UPDATE user_tb SET festa_id = %s, time = NOW() WHERE user_token = %s"
+            curs.execute(sql, (id, user_token))
+        print(sql)
         conn.commit()
         conn.close()

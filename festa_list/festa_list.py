@@ -7,7 +7,7 @@ from common.DBconncter import DBconncter
 from ui.ui import Ui
 from datetime import datetime
 from region_ota_checker.region_checker import region_translater, region_check_flg
-
+from date_checker.date_checker import DateChecker
 year = datetime.today().strftime("%Y")
 month = datetime.today().strftime("%m")
 
@@ -22,7 +22,7 @@ class FestaList:
         region_check = 0
         region_list = ""
         word = ""
-        query = 'select * from (select * from festival_tb where enddate > sysdate()) A where '
+        query = 'select * from (select * from festival_tb where enddate > sysdate()) A where ' #기본 쿼리
         for v in stem_list:
             if v[1] == 'Number' and v[0][len(v[0])-1] == '월':    #숫자를 나타내는 ex) 1월 1일
                 word += v[0]+','
@@ -33,10 +33,15 @@ class FestaList:
                 month_query += mon_qu #조건 한줄 씩 추가
 
             if v[1] == 'Noun':
-                v = region_translater(v[0])
-                word += v+','
-                region_check += 1
-                region_list += "'"+v+"',"
+                if DateChecker.month_check(v[0]):   #월 인지 체크
+                    month = DateChecker.month_generater(v[0])
+                    mon_qu = "startdate between '" + year + "." + month + ".01' and '" + year + "." + month + ".31' or "
+                    month_query += mon_qu  # 조건 한줄 씩 추가
+                else:
+                    v = region_translater(v[0])     #지역인지 체크
+                    word += v+','
+                    region_check += 1
+                    region_list += "'"+v+"',"
 
         if month_query != "" : query += "("+month_query[0:len(month_query) - 3]+")" #where절에 마지막 and를 날린다  #날짜를 쿼리에 넣음
 
