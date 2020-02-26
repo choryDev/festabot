@@ -5,13 +5,13 @@ month_map = {'일월': '01', '이월': '02', '삼월': '03', '사월': '04', '�
 
 class DateChecker:
 
-    def month_generater(self, word):
+    def month_generater(word):
         for v in month:
             if v == word:
                 return month_map[v]
         return word
 
-    def month_check(self, word):
+    def month_check(word):
         flag = False
         for v in month:
             if v == word:

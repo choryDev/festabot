@@ -35,6 +35,7 @@ class FestaList:
             if v[1] == 'Noun':
                 if DateChecker.month_check(v[0]):   #월 인지 체크
                     month = DateChecker.month_generater(v[0])
+                    print(month)
                     mon_qu = "startdate between '" + year + "." + month + ".01' and '" + year + "." + month + ".31' or "
                     month_query += mon_qu  # 조건 한줄 씩 추가
                 else:
@@ -49,10 +50,7 @@ class FestaList:
             if month_query != "": query += "and region in ("+region_list[0:len(region_list)-1]+")"   #조건 한줄 추가 #and region in ('부산','서울')
             else: query += " region in ("+region_list[0:len(region_list)-1]+")"   #조건 한줄 추가 #where region in ('부산','서울')
 
-        print(query)
         db_obj = DBconncter().select_query(query)
-        print(db_obj)
-        print(len(db_obj))
         if len(db_obj) == 0:    # 찾았는데 없을 경우 길이가 0 개
             return Ui().none_festa_list_ui(word[0:len(word) - 1])
         else:
@@ -63,7 +61,7 @@ class FestaList:
         counter = 0
         stem_list = okt.pos(self.content)
         for v in stem_list:
-            if v[1] == 'Number' or region_check_flg(v[0]):
+            if v[1] == 'Number' or region_check_flg(v[0]) or DateChecker.month_check(v[0]):
                 counter +=1
         if counter == len(stem_list):
             return FestaList.easy_list(stem_list)
