@@ -8,6 +8,7 @@ from ui.ui import Ui
 from datetime import datetime
 from region_ota_checker.region_checker import region_translater, region_check_flg
 from date_checker.date_checker import DateChecker
+from naive_bayes.bayes_siml import BayesSiml
 year = datetime.today().strftime("%Y")
 month = datetime.today().strftime("%m")
 
@@ -35,7 +36,6 @@ class FestaList:
             if v[1] == 'Noun':
                 if DateChecker.month_check(v[0]):   #월 인지 체크
                     month = DateChecker.month_generater(v[0])
-                    print(month)
                     mon_qu = "startdate between '" + year + "." + month + ".01' and '" + year + "." + month + ".31' or "
                     month_query += mon_qu  # 조건 한줄 씩 추가
                 else:
@@ -61,7 +61,10 @@ class FestaList:
         counter = 0
         stem_list = okt.pos(self.content)
         for v in stem_list:
-            if v[1] == 'Number' or region_check_flg(v[0]) or DateChecker.month_check(v[0]):
+            if v[1] == 'Number' or region_check_flg(v[0]) or DateChecker.month_check(v[0]): #월 지역 만 물어봤을 경우
                 counter +=1
-        if counter == len(stem_list):
+        if counter == len(stem_list):               #지역, 월 만 입력 했을 경우
             return FestaList.easy_list(stem_list)
+        else:
+            print(BayesSiml().checker(self.content)> -20)
+            print(BayesSiml().checker(self.content))
