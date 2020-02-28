@@ -8,14 +8,15 @@ from ui.ui import Ui
 from datetime import datetime
 from region_ota_checker.region_checker import region_translater, region_check_flg
 from date_checker.date_checker import DateChecker
-from naive_bayes.bayes_siml import BayesSiml
+from tf_idf.tf_idf import tf_idf_checker
+from purpose_classification.find_purpose import FindPurpose
 year = datetime.today().strftime("%Y")
 month = datetime.today().strftime("%m")
 
 class FestaList:
 
     def __init__(self, req):
-        self.content = req['userRequest']['utterance']
+        self.sentence = req['userRequest']['utterance']
         self.user = req['userRequest']['user']['id']
 
     def easy_list(stem_list):
@@ -59,12 +60,13 @@ class FestaList:
     def main_func(self): #형태소 겟수 세는 함수
         okt = Okt()
         counter = 0
-        stem_list = okt.pos(self.content)
+        stem_list = okt.pos(self.sentence)
         for v in stem_list:
             if v[1] == 'Number' or region_check_flg(v[0]) or DateChecker.month_check(v[0]): #월 지역 만 물어봤을 경우
                 counter +=1
         if counter == len(stem_list):               #지역, 월 만 입력 했을 경우
             return FestaList.easy_list(stem_list)
+        elif tf_idf_checker(self.sentence):
+            FindPurpose(self.sentence).main()
         else:
-            print(BayesSiml().checker(self.content)> -20)
-            print(BayesSiml().checker(self.content))
+            return Ui().not_festa_recommand()

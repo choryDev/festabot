@@ -14,5 +14,7 @@ class Optionclassification:
             return Option(self.requset_obj).get_weather()
         elif self.sentence == "맛집":
             return Option(self.requset_obj).get_restaurant()
+        elif self.sentence == "카페":
+            return Option(self.requset_obj).get_cafe()
         else:
             print("[SERVER] 재입력바랍니다")
