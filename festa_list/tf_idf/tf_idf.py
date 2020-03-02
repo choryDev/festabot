@@ -1,18 +1,13 @@
 import csv
 import pandas as pd
-
-pd.options.mode.chained_assignment = None
-
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
 import numpy as np
-
-np.random.seed(0)
-
 from konlpy.tag import Okt
 
 okt = Okt()
-
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
+pd.options.mode.chained_assignment = None
+np.random.seed(0)
 
 
 # tokenizer : 문장에서 색인어 추출을 위해 명사,동사,알파벳,숫자 정도의 단어만 뽑아서 normalization, stemming 처리하도록 함
@@ -55,7 +50,6 @@ features = vectorize.get_feature_names()
 def tf_idf_checker(sentence):
     # 검색 문장에서 feature를 뽑아냄
     srch = [t for t in tokenizer(sentence) if t in features]
-    print(srch)
     # ['1987', '대통령']
 
     # dtm 에서 검색하고자 하는 feature만 뽑아낸다.
@@ -68,12 +62,7 @@ def tf_idf_checker(sentence):
     # array([0.         0.         1.10877443 1.40815765 0.8695635 ], dtype=int64) 문장별 feature 합계 점수
 
     tf_idf = False  # 체크 축제를 묻는게 맞는지 체크해주는 플래그
-    score = score.argsort()[::-1]
-    if score[0] > 0:
+
+    if score[score.argsort()[::-1][0]] > 0: #score에서 내림차순 정렬을한 번쨰의 score 값
         tf_idf = True
-    # for i in :
-    #     if score[i] :
-    #         print('{} / score : {}'.format(rawdata[i], score[i]))
-
-
     return tf_idf

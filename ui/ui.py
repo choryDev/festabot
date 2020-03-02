@@ -117,3 +117,18 @@ class Ui:
             }
         }
         return dataSend
+
+    def not_festa_recommand(self):
+        dataSend = {
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                    {
+                        "simpleText": {
+                            "text": "축제 정보를 원하는게 아닌거 같은데, 원하는 축제 물어봐줘"
+                        }
+                    }
+                ]
+            }
+        }
+        return dataSend
