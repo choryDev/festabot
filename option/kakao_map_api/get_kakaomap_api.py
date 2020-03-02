@@ -2,7 +2,7 @@ import simplejson, requests, sys
 
 def get_restaurant_list():
 
-    url = "https://dapi.kakao.com/v2/local/search/keyword.json?x=129.348359&y=35.6310172&radius=1000" #radius는 미터단위
+    url = "https://dapi.kakao.com/v2/local/search/keyword.json?x=127.4714689112&y=36.6441001847&radius=1000" #radius는 미터단위
     apikey = "5e5acc55c8584f36abffe26633c82550"
     query = "맛집"
 
@@ -20,7 +20,7 @@ def get_restaurant_list():
 
 def get_cafe_list():
 
-    url = "https://dapi.kakao.com/v2/local/search/keyword.json?x=129.348359&y=35.6310172&radius=1000" #radius는 미터단위
+    url = "https://dapi.kakao.com/v2/local/search/keyword.json?x=127.4714689112&y=36.6441001847&radius=1000" #radius는 미터단위
     apikey = "5e5acc55c8584f36abffe26633c82550"
     query = "카페"
 

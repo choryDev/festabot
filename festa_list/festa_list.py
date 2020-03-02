@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from common.DBconncter import DBconncter
-from ui.ui import Ui
+from ui import ui
 from datetime import datetime
 from region_ota_checker.region_checker import region_translater, region_check_flg
 from date_checker.date_checker import DateChecker
@@ -53,9 +53,9 @@ class FestaList:
 
         db_obj = DBconncter().select_query(query)
         if len(db_obj) == 0:    # 찾았는데 없을 경우 길이가 0 개
-            return Ui().none_festa_list_ui(word[0:len(word) - 1])
+            return ui.none_festa_list_ui(word[0:len(word) - 1])
         else:
-            return Ui().festa_list_ui(db_obj[0:5], db_obj[5:], word[0:len(word) - 1])
+            return ui.festa_list_ui(db_obj[0:5], db_obj[5:], word[0:len(word) - 1])
 
     def main_func(self): #형태소 겟수 세는 함수
         okt = Okt()
@@ -67,6 +67,6 @@ class FestaList:
         if counter == len(stem_list):               #지역, 월 만 입력 했을 경우
             return FestaList.easy_list(stem_list)
         elif tf_idf_checker(self.sentence):
-            FindPurpose(self.sentence).main()
+            return FindPurpose(self.sentence).main()
         else:
-            return Ui().not_festa_recommand()
+            return ui.text_message("축제 정보를 원하는게 아닌거 같은데, 원하는 축제 물어봐줘")

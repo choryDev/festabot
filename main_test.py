@@ -15,7 +15,6 @@ def Keyboard():
 def Message():
     req = request.get_json()
     dataSend = FestaList(req).main_func()
-    print(dataSend)
     return jsonify(dataSend)
 
 @app.route('/btn_more_festa_list', methods=['POST'])

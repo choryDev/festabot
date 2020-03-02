@@ -6,7 +6,7 @@ import re
 
 class WordFrequency:
 
-    def get_noun(self, sentence, ntags=200): #명사만 뽑는 함수
+    def get_noun(self, sentence, ntags=300): #명사만 뽑는 함수
         okt = Okt()
         nouns = okt.nouns(sentence)
         count = Counter(nouns)
@@ -25,7 +25,7 @@ class WordFrequency:
 
     def split_festa_title(self, festa_title, blog_title):
         #축제 제목을 토큰화 시켜서 그 단어가 블로그 제목에 있는지 확인하는 함수
-        flag = 0
+        flag = False
         stop_words = Common_stopwords().stop_words_region()
 
         okt = Okt()

@@ -108,11 +108,12 @@ class Option:
         return dataSend
 
     def get_weather(self):
+        from time import strptime
         conn = pymysql.connect(host=host, user = user, 
                        password=password , db=db, charset=charset)
 
         curs = conn.cursor()
-        sql = 'select region, title, address, startdate, enddate img from festival_tb where title = "전국생활문화축제 2019";'
+        sql = 'select region, title, address, startdate, enddate from festival_tb where title = "전국생활문화축제 2019";'
         curs.execute(sql)
 
         data = curs.fetchall()
@@ -126,9 +127,31 @@ class Option:
         weatherlist = list(data)
         print(festlist) #테스트
         conn.close()
-        # for i in range(len(weatherlist[0])):
-        #     if weatherlist[i][0] == festlist[0]: #지역이 일치할때까지 반복
-                # print(weatherlist[i][0],"의 날씨는", weatherlist[i][1],"입니다")
+
+        feststartdate, festenddate = festlist[3], festlist[4] #혹시 몰라 끝나는날까지 추출
+
+        print(feststartdate,festenddate)
+
+        fest_mon = strptime(feststartdate,"%Y.%m.%d")
+
+        for i in range(len(weatherlist)):
+            if weatherlist[i][0] == festlist[0]: #지역이 일치할때까지 반복
+                print(fest_mon.tm_mon,"월", weatherlist[i][0],"의 날씨는", weatherlist[i][fest_mon.tm_mon],"입니다")
+        
+        dataSend = {
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                    {
+                         "simpleText": {
+                            "text": str(fest_mon.tm_mon) + "월 " + str(weatherlist[i][0]) + "의 날씨는 " + str(weatherlist[i][fest_mon.tm_mon]) + "입니다."
+                        }
+                    }
+                ]
+            }
+        }
+        return dataSend
+
     
     def get_restaurant(self):
         restaurant_list = []

@@ -25,5 +25,5 @@ class Doc2VecEvaluator:
 
     def get_movie_title(self, festa_id):
         query = 'select title from festival_tb where id = '+festa_id
-        title = DBconncter().select_query(query)
+        title = DBconncter().select_query(query)[0][0]
         return title

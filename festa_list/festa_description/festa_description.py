@@ -1,8 +1,8 @@
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from common.DBconncter import DBconncter
-from ui.ui import Ui
+from ui import ui
 
 class FestaDescription:
 
@@ -17,4 +17,4 @@ class FestaDescription:
         #사용자가 조회 한 것을 넣는 쿼리
         user_token = req['userRequest']['user']['properties']['plusfriendUserKey']
         DBconncter().insert_festa_desc_query(user_token, id)
-        return Ui().festa_description(db_obj[0])
+        return ui.festa_description(db_obj[0])
