@@ -1,4 +1,8 @@
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './')))
 from option_class import Option
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+from common.DBconncter import DBconncter
 
 class Optionclassification:
     def __init__(self, requset_obj):
@@ -16,5 +20,8 @@ class Optionclassification:
             return Option(self.requset_obj).get_restaurant()
         elif self.sentence == "카페":
             return Option(self.requset_obj).get_cafe()
+        elif self.sentence == "나가기":
+            user_token = self.requset_obj['userRequest']['user']['properties']['plusfriendUserKey']
+            DBconncter().selected_out(user_token)
         else:
             print("[SERVER] 재입력바랍니다")

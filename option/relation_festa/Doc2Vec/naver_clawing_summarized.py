@@ -75,7 +75,7 @@ class Naver_blog_clawer:
             blog_post_content = re.sub("[^가-힣1-9 ]", "", blog_post_content)
             if(blog_post_content=="" or blog_post_content==" " ):
                 continue
-            if( len(blog_post_content) < 800 and len(blog_post_content) > 20):
+            if len(blog_post_content) > 25:
                 print(blog_post_content)
                 self.all_blog_post_text.append(blog_post_content)
 
@@ -165,7 +165,7 @@ file = open('dataset/naver_doc2vec_dataset'+time_title+'.txt','w')
 for id, title in db_obj:
     print(title)
     sents = Naver_blog_clawer(title).main()
-    keysents = summarizer.summarize(sents, topk=50)
+    keysents = summarizer.summarize(sents, topk=200)
     for v in keysents:
         print(v)
         file.write(v[2]+'␞'+str(id)+'\n')

@@ -29,6 +29,17 @@ class DBconncter:
         else:
             sql = "UPDATE user_tb SET festa_id = %s, time = NOW() WHERE user_token = %s"
             curs.execute(sql, (id, user_token))
-        print(sql)
         conn.commit()
         conn.close()
+
+    def selected_out(self, user_token):         #빠져 나오는 쿼리
+        delete_query = "DELETE FROM user_tb WHERE user_token = %s"
+        conn = pymysql.connect(host=host, user=user,
+                               password=password, db=db, charset='utf8')
+        curs = conn.cursor()
+        curs.execute(delete_query, (user_token))
+        conn.commit()
+        conn.close()
+
+
+

@@ -13,8 +13,8 @@ def get_festa_list():
 
     curs = conn.cursor()
 
-    sql = 'select id, title, region, startdate  from festival_tb where enddate > CURDATE()'
-    #sql = 'select id, title, region  from festival_tb where enddate > CURDATE() and region = "대전"'
+    sql = 'select id, title, region, startdate  from festival_tb'
+    #sql = 'select id, title, region  from festival_tb where enddate > CURDATE() and id = 606'
     curs.execute(sql)
 
     # 데이타 Fetch
@@ -25,12 +25,13 @@ def get_festa_list():
 
 obj = []
 for r in get_festa_list():
-    val = Naver_blog_clawer().main(r[1], r[0], r[2], r[3]) #축제명, 코드를 받음
+    val = Naver_blog_clawer().main(r[0], r[2]) #축제명, 코드를 받음
     obj.append(val)
 
 with open('./word_freq'+datetime.today().strftime("%Y%m%d")+'.json', 'w', encoding='utf-8') as make_file:
     json.dump(obj, make_file, indent="\t")
 
+print("hello world")
 # with open('./word_freq'+datetime.today().strftime("%Y%m%d")+'.json', 'r', encoding="utf-8") as f:
 #
 #     json_data = json.load(f)

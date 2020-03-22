@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../'
 from common.DBconncter import DBconncter
 from ui import ui
 from datetime import datetime
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './')))
 from region_ota_checker.region_checker import region_translater, region_check_flg
 from date_checker.date_checker import DateChecker
 from tf_idf.tf_idf import tf_idf_checker

@@ -46,8 +46,8 @@ class Naver_blog_clawer:
             else:
                 blog_total = math.ceil(response_body_dict['total'] / int(display))
 
-                if blog_total >= 1000:
-                    blog_count = 1000
+                if blog_total >= 500:
+                    blog_count = 500
                 else:
                     blog_count = blog_total
 
@@ -138,7 +138,7 @@ class Naver_blog_clawer:
 
         return all_blog_post_text
 
-    def main(self, title, id, region):
+    def main(self, id, title):
         #no = 0  # 몇개의 포스트를 저장하였는지 세기 위한 index
         query = re.sub("[0-9]", '',title)  # 검색을 원하는 문자열로서 UTF-8로 인코딩한다. 제목의 숫자는 없앰
         display = 100  # 검색 결과 출력 건수 지정, 10(기본값),100(최대)
@@ -153,7 +153,6 @@ class Naver_blog_clawer:
 
         obj = {
             "id" : id,
-            "region" : region,
             'freq_words' : WordFrequency().get_noun(all_blog_post_text) #단어 빈도수 담는 배열
         }
 

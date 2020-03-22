@@ -97,7 +97,7 @@ class Option:
                         {
                         "action": "message",
                         "label": "카드형으로 검색",
-                        "messageText" : "test"
+                        "messageText" : "카드형으로 검색"
                         }
                     ]
                     }
@@ -108,6 +108,7 @@ class Option:
         return dataSend
 
     def get_weather(self):
+        
         from time import strptime
         conn = pymysql.connect(host=host, user = user, 
                        password=password , db=db, charset=charset)
@@ -137,7 +138,7 @@ class Option:
         for i in range(len(weatherlist)):
             if weatherlist[i][0] == festlist[0]: #지역이 일치할때까지 반복
                 print(fest_mon.tm_mon,"월", weatherlist[i][0],"의 날씨는", weatherlist[i][fest_mon.tm_mon],"입니다")
-        
+
         dataSend = {
             "version": "2.0",
             "template": {
@@ -161,7 +162,7 @@ class Option:
         for i in range(10):
             print(restaurant_list[i]) #모니터링
 
-        for i in range(10):
+        for i in range(10): #지역마다 추가
             items_list.append(
                 {
                     "title": restaurant_list[i]['상호명'],
@@ -199,34 +200,46 @@ class Option:
         items_list = [] 
         cafe_list = get_cafe_list()
 
-        for i in range(10):
-            print(cafe_list[i]) #모니터링
+        # for i in range(10):
+        #     print(cafe_list[i]) #모니터링
 
-        for i in range(10):
+        for i in range(5): #imageUrl은 대체이미지 찾을 때 까지 비활성
             items_list.append(
                 {
                     "title": cafe_list[i]['상호명'],
                     "description": cafe_list[i]['주소'],
-                    "thumbnail": {
-                        "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-                    },
-                    "buttons": [
-                        {
-                            "action" : "webLink",
-                            "label" : "지도 열기",
-                            "webLinkUrl": "daummaps://look?p=" + cafe_list[i]['y'] + "," + cafe_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
-                        }
-                    ]
-                })
+                    # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
+                    "link": {
+                        "web": "daummaps://look?p=" + cafe_list[i]['y'] + "," + cafe_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
+                    }
+                }
+            )
 
         dataSend = {
             "version": "2.0",
             "template": {
                 "outputs": [
-                {
-                    "carousel": {
-                        "type": "basicCard",
-                        "items": items_list
+                    {
+                    "listCard": {
+                        "header": {
+                            "title": "추천 카페"
+                        },
+                        "items": items_list,
+                        "buttons": [
+                            {
+                                "label": "지도로 보기",
+                                "action": "webLink",
+                                "webLinkUrl" : "daummaps://search?q=카페&p=" + str(cafe_list[i]['y']) + "," + str(cafe_list[i]['x'])
+                            },
+                            {
+                                "label": "더보기",
+                                "action": "block",
+                                "blockId": "5e7077b22d3cd0000121a040",
+                                "extra": {
+                                    "another_list" : cafe_list[5:len(cafe_list)]
+                                }
+                            }
+                        ]
                     }
                 }
                 ]
