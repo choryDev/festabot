@@ -54,8 +54,8 @@ class Naver_blog_clawer:
             else:
                 blog_total = math.ceil(response_body_dict['total'] / int(display))
 
-                if blog_total >= 200:
-                    blog_count = 200
+                if blog_total >= 150:
+                    blog_count = 150
                 else:
                     blog_count = blog_total
 
@@ -76,6 +76,7 @@ class Naver_blog_clawer:
             if(blog_post_content=="" or blog_post_content==" " ):
                 continue
             if len(blog_post_content) > 25:
+                time.sleep(0.2)
                 print(blog_post_content)
                 self.all_blog_post_text.append(blog_post_content)
 

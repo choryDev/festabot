@@ -89,10 +89,11 @@ class FindPurpose:
         query = 'select * from (select * from festival_tb where enddate > sysdate()) A where '  # 기본 쿼리
         #query = 'select * from festival_tb where'  # 기본 쿼리
         token = FindPurpose.okt_tokenizer(self.sentence)
+        print(token)
         if len(token) != 0:  # 토큰화하여 처리할 문장이 있다
-            print(str(token) + '////처음')
 
-            for word, tag in token:
+            while token_idx < len(token):
+                word, tag = token[token_idx][0], token[token_idx][1]
 
                 if tag == 'Number':
                     title += word + ','  # 보여질 제목에 들어갈 문장
@@ -112,33 +113,128 @@ class FindPurpose:
                         mon_qu = "startdate between '" + year + "." + word + ".01' and '" + year + "." + word + ".31' or "
                         print(mon_qu)
                         date_query += mon_qu  # 조건 한줄 씩 추가
-                    elif word in ['이번', '다음주', '다음달', '다다', '주말']: #향후 있을 날짜 처리
-                        weeks = 0,
-                        if word == '이번':
-                            print('hello1')
-                            if token[token_idx+1][0] == '주':
-                                print('hello2')
-                                weeks = 1
-                                if token[token_idx+2][0] in ['주말', '주', '월요일', '월요일', '월요일', '월요일', '월요일', '월요일', '월요일']:
-                                    print('ddd')
-                                else:   #이번주 라고 쳤을 경우
-                                    print('hello3')
-                                    today = datetime.today()
-                                    mon_day = today + datetime.timedelta(days=-today.weekday(), weeks=0)
-                                    sun_day = today + datetime.timedelta(days=-today.weekday()+6, weeks=0)
-                                    mon_qu = "startdate between '" + year + "." + month + "."+mon_day.strftime("%d")+\
-                                                            "' and '" + year + "." + month + "."+sun_day.strftime("%d")+"' or "
-                                    print(mon_qu)
-                                    # date_query += mon_qu  # 조건 한줄 씩 추가
 
-                            #elif token[token_idx+1] == '달' or token[token_idx+1] == '월'
+                    elif word in ['이번', '다음주', '다음', '다다', '주말', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'
+                            , '월', '화', '수', '목', '금', '토', '일']: #향후 있을 날짜 처리 ex) 이번 달, 다음 주 일요일
+                        #이번, 다음, 다다음, 토큰화 방식이 너무 다름
+                        if word == '이번':
+                            if token[token_idx+1][0] == '주':    #주말을 물어 봤을 경우
+                                if token[token_idx+2][0] in ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'
+                                                             , '월', '화', '수', '목', '금', '토', '일']:
+                                    day_of_the_week = 0
+                                    for a in [('월요일', 0), ('화요일', 1), ('수요일', 2), ('목요일', 3), ('금요일', 4), ('토요일', 5), ('일요일', 6),
+                                              ('월', 0), ('화', 1), ('수', 2), ('목', 3), ('금', 4), ('토', 5), ('일', 6),]:
+                                        if token[token_idx+2][0] == a[0]: #무슨 요일인지 찾음
+                                            day_of_the_week = a[1]
+
+                                    today = datetime.today()
+                                    day = today + timedelta(days=-today.weekday() + day_of_the_week, weeks = 0)  # 월요일
+                                    mon_qu = "(startdate < '"+day.strftime("%Y.%m.%d")+"' and enddate > '"+day.strftime("%Y.%m.%d")+"') or"
+                                    title += word + token[token_idx + 1][0] + ','+ token[token_idx + 2][0] + ','
+                                    del token[token_idx + 1];  # 이번, "주" 제거
+                                    del token[token_idx + 1];  # 이번, "주", '요일' 제거
+                                    date_query += mon_qu  # 조건 한줄 씩 추가
+
+                                else:   #주간으로 물어 봤을 경우
+                                    today = datetime.today()
+                                    mon_day = today + timedelta(days=-today.weekday(), weeks = 0) #월요일
+                                    sun_day = today + timedelta(days=-today.weekday()+6, weeks = 0) #일요일
+                                    mon_qu = "startdate between '" +mon_day.strftime("%Y.%m.%d")+\
+                                                            "' and '"+sun_day.strftime("%Y.%m.%d")+"' or "
+                                    title += word + token[token_idx + 1][0] + ','
+                                    del token[token_idx + 1]; #이번, "주" 제거
+                                    date_query += mon_qu  # 조건 한줄 씩 추가
+
+                            elif token[token_idx+1][0] == '달' or token[token_idx+1][0] == '월':  #달, 월 로 쳤을 경우
+                                st_month = (datetime(int(year), int(month), 1) + relativedelta(months = 0)).strftime(
+                                    "%Y.%m.%d")
+                                ed_month = (datetime(int(year), int(month), 30) + relativedelta(months= 0)).strftime(
+                                    "%Y.%m.%d")
+                                title += word + token[token_idx + 1][0] + ','
+                                del token[token_idx + 1];  # 이번, "달" 제거
+                                mon_qu = "startdate between '" + st_month + "' and '" + ed_month + "' or "
+                                date_query += mon_qu  # 조건 한줄 씩 추가
+
+                        elif word == '다음주':
+                            try:
+                                if token[token_idx+1][0] in ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'
+                                                             , '월', '화', '수', '목', '금', '토', '일']:
+                                    day_of_the_week = 0
+                                    for a in [('월요일', 0), ('화요일', 1), ('수요일', 2), ('목요일', 3), ('금요일', 4), ('토요일', 5), ('일요일', 6),
+                                              ('월', 0), ('화', 1), ('수', 2), ('목', 3), ('금', 4), ('토', 5), ('일', 6),]:
+                                        if token[token_idx+1][0] == a[0]: #무슨 요일인지 찾음
+                                            day_of_the_week = a[1]
+
+                                    today = datetime.today()
+                                    day = today + timedelta(days=-today.weekday() + day_of_the_week, weeks = 1)  # 월요일
+                                    mon_qu = "(startdate < '"+day.strftime("%Y.%m.%d")+"' and enddate > '"+day.strftime("%Y.%m.%d")+"') or"
+                                    title += word + token[token_idx + 1][0] + ','
+                                    del token[token_idx + 1];  # 다음주, "요일" 제거
+                                    date_query += mon_qu  # 조건 한줄 씩 추가
+                                else:
+                                    today = datetime.today()
+                                    mon_day = today + timedelta(days=-today.weekday(), weeks=1)  # 월요일
+                                    sun_day = today + timedelta(days=-today.weekday() + 6, weeks=1)  # 일요일
+                                    mon_qu = "startdate between '" + mon_day.strftime("%Y.%m.%d") + \
+                                             "' and '" + sun_day.strftime("%Y.%m.%d") + "' or "
+                                    title += word + ','
+                                    date_query += mon_qu  # 조건 한줄 씩 추가
+                            except IndexError:
+                                today = datetime.today()
+                                mon_day = today + timedelta(days=-today.weekday(), weeks=1)  # 월요일
+                                sun_day = today + timedelta(days=-today.weekday() + 6, weeks=1)  # 일요일
+                                mon_qu = "startdate between '" + mon_day.strftime("%Y.%m.%d") + \
+                                         "' and '" + sun_day.strftime("%Y.%m.%d") + "' or "
+                                title += word + ','
+                                date_query += mon_qu  # 조건 한줄 씩 추가
+
+                        elif word == '다음':
+                            if token[token_idx+1][0] == '달':    #주말을 물어 봤을 경우
+                                st_month = (datetime(int(year), int(month), 1) + relativedelta(months=1)).strftime("%Y.%m.%d")
+                                ed_month = (datetime(int(year), int(month), 30) + relativedelta(months=1)).strftime("%Y.%m.%d")
+                                title += word + token[token_idx + 1][0] + ','
+                                del token[token_idx + 1];  # 다음, "" 제거달
+                                mon_qu = "(startdate < '" + st_month + "' and enddate > '" + ed_month + "') or"
+                                date_query += mon_qu  # 조건 한줄 씩 추가
+
+                        elif word == '다다':
+                            if token[token_idx+1][0] == '음주':    #다다음주 물어 봤을 경우
+                                today = datetime.today()
+                                mon_day = today + timedelta(days=-today.weekday(), weeks=2)  # 월요일
+                                sun_day = today + timedelta(days=-today.weekday() + 6, weeks=2)  # 일요일
+                                mon_qu = "startdate between '" + mon_day.strftime("%Y.%m.%d") + \
+                                         "' and '" + sun_day.strftime("%Y.%m.%d") + "' or "
+                                title += word + ',' + token[token_idx + 1][0] + ','
+                                date_query += mon_qu  # 조건 한줄 씩 추가
+                            if token[token_idx+1][0] == '음달':    #다다음주 물어 봤을 경우
+                                st_month = (datetime(int(year), int(month), 1) + relativedelta(months=2)).strftime("%Y.%m.%d")
+                                ed_month = (datetime(int(year), int(month), 30) + relativedelta(months=2)).strftime("%Y.%m.%d")
+                                title += word + token[token_idx + 1][0] + ','
+                                del token[token_idx + 1];  # 다음, "" 제거달
+                                mon_qu = "(startdate < '" + st_month + "' and enddate > '" + ed_month + "') or"
+                                date_query += mon_qu  # 조건 한줄 씩 추가
+
+                        if word in ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'
+                            , '월', '화', '수', '목', '금', '토', '일']:
+                            day_of_the_week = 0
+                            for a in [('월요일', 0), ('화요일', 1), ('수요일', 2), ('목요일', 3), ('금요일', 4), ('토요일', 5),
+                                      ('일요일', 6),
+                                      ('월', 0), ('화', 1), ('수', 2), ('목', 3), ('금', 4), ('토', 5), ('일', 6), ]:
+                                if word == a[0]:  # 무슨 요일인지 찾음
+                                    day_of_the_week = a[1]
+
+                            today = datetime.today()
+                            day = today + timedelta(days=-today.weekday() + day_of_the_week, weeks=0)  # 월요일
+                            mon_qu = "(startdate < '" + day.strftime("%Y.%m.%d") + "' and enddate > '" + day.strftime(
+                                "%Y.%m.%d") + "') or"
+                            title += word + ','
+                            date_query += mon_qu  # 조건 한줄 씩 추가
 
                     elif region_check_flg(word):  # 지역인지 체크
                         region = region_translater(word)
                         title += region + ','
                         region_list += "'" + region + "',"
                     else:
-                        print(word)
                         id_list = FindPurpose.word_pupose(self, word)
                         if len(id_list) != 0:
                             for festa_id in id_list:
@@ -155,8 +251,6 @@ class FindPurpose:
                                     purpose_query += "id = " + str(festa_id) + " or "
 
                 token_idx += 1 #다음 인덱스
-
-            print(str(token)+'마지막')
 
             if date_query != "":
                 query += "(" + date_query[0:len(date_query) - 3] + ") and"  # where절에 마지막 or를 날린다  #날짜를 쿼리에 넣음
@@ -176,6 +270,7 @@ class FindPurpose:
 
             elif query_cheker:  # 조건이 들어가는 쿼리가 있음
                 query = query[0:len(query) - 3]
+                print(query)
                 db_obj = DBconncter().select_query(query)  # 조건이 있으면 db에 넣음
                 if len(db_obj) == 0:  # word2vec으로 축제들을 가져왔지만 축제가 있는지 없는지
                     return ui.text_message("조건에 맞는 열릴 축제가 없나봐 ㅠ.ㅠ")

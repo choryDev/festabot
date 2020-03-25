@@ -18,7 +18,6 @@ class Doc2VecEvaluator:
         similar_movies = self.model.docvecs.most_similar(str(festa_id), topn=topn)
         for festa_id, score in similar_movies:
             obj = {'id': festa_id,
-                    'title': Doc2VecEvaluator.get_movie_title(self, festa_id),
                     'score': score}
             list.append(obj)
         return list

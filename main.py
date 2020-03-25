@@ -45,5 +45,10 @@ def option_cafe_more():
     print("hello~")
     return jsonify(dataSend)
 
+@app.route('/option_restaurant_more', methods=['POST'])
+def option_restaurant_more():
+    print("hello motherfucker")
+    return jsonify(dataSend)
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

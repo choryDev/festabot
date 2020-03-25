@@ -159,35 +159,47 @@ class Option:
         items_list = [] 
         restaurant_list = get_restaurant_list()
 
-        for i in range(10):
-            print(restaurant_list[i]) #모니터링
+        # for i in range(10):
+            # print(restaurant_list[i]) #모니터링
 
-        for i in range(10): #지역마다 추가
+        for i in range(5): #지역마다 추가
             items_list.append(
                 {
                     "title": restaurant_list[i]['상호명'],
                     "description": restaurant_list[i]['주소'],
-                    "thumbnail": {
-                        "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-                    },
-                    "buttons": [
-                        {
-                            "action" : "webLink",
-                            "label" : "지도 열기",
-                            "webLinkUrl": "daummaps://look?p=" + restaurant_list[i]['y'] + "," + restaurant_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
-                        }
-                    ]
-                })
+                    # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
 
+                    "link": {
+                            "web": "daummaps://look?p=" + restaurant_list[i]['y'] + "," + restaurant_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
+                        }
+                }
+            )
 
         dataSend = {
             "version": "2.0",
             "template": {
                 "outputs": [
-                {
-                    "carousel": {
-                        "type": "basicCard",
-                        "items": items_list
+                    {
+                    "listCard": {
+                        "header": {
+                            "title": "추천 맛집"
+                        },
+                        "items": items_list,
+                        "buttons": [
+                            {
+                                "label": "지도로 보기",
+                                "action": "webLink",
+                                "webLinkUrl" : "daummaps://search?q=맛집&p=" + str(restaurant_list[i]['y']) + "," + str(restaurant_list[i]['x'])
+                            },
+                            {
+                                "label": "더보기",
+                                "action": "block",
+                                "blockId": "5e79f20bb7987f0001a17b93",
+                                "extra": {
+                                    "another_list" : restaurant_list[5:len(restaurant_list)]
+                                }
+                            }
+                        ]
                     }
                 }
                 ]
