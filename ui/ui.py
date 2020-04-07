@@ -1,5 +1,3 @@
-
-
 def none_festa_list_ui(word):
     send_data = {
         "version": "2.0",
@@ -24,7 +22,7 @@ def festa_list_ui(festa_list, another_festa_list, word):
         item = {
                    "title": v[2],
                    "description": '' if v[10]=='null' else  v[10], #만약 null 이면 빈값
-                   "imageUrl": v[11],
+                   "imageUrl": v[15],
                    "link": {
                        "web": v[5]
                    },
@@ -84,7 +82,7 @@ def festa_description(db_obj):
                         "title": db_obj[2],
                         "description": desc,
                         "thumbnail": {
-                            "imageUrl": db_obj[11]
+                            "imageUrl": db_obj[15]
                         },
                         "profile": {
                             "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM",
@@ -128,6 +126,44 @@ def text_message(sentence):
                         "text": sentence
                     }
                 }
+            ]
+        }
+    }
+    return dataSend
+
+########################### Jonghun UIs
+
+def address_ui(datalist):
+    dataSend = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+            {
+                "basicCard": {
+                "title": datalist[1],
+                "description": datalist[2],
+                "thumbnail": {
+                    "imageUrl": str(datalist[5])
+                },
+                "buttons": [
+                    {
+                    "action": "webLink",
+                    "label": "카카오맵 열기",
+                    "webLinkUrl": "daummaps://search?q=" + str(datalist[2]) + "&p=" + str(datalist[3]) + "," + str(datalist[4])
+                    },
+                    {
+                    "action":  "webLink",
+                    "label": "카카오맵 길찾기",
+                    "webLinkUrl": "https://map.kakao.com/link/to/" + str(datalist[2]) + ',' + str(datalist[3]) + ',' + str(datalist[4])
+                    },
+                    {
+                    "action": "webLink",
+                    "label": "카카오맵 자동차 길찾기",
+                    "webLinkUrl": "daummaps://route?sp=35.1516077265, 129.1173479525&ep=" + str(datalist[3]) + "," + str(datalist[4]) + "&by=CAR"
+                    }
+                ]
+                }
+            }
             ]
         }
     }

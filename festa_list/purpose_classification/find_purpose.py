@@ -23,7 +23,7 @@ date = datetime.today().strftime("%d")
 
 path = '/home/ubuntu/festabot/festa_list/purpose_classification/word_freq_dir/'
 # with open('word_freq_dir/word_freq' + str(int(datetime.today().strftime("%Y%m%d"))-1) + '.json', 'r', encoding="utf-8") as f:
-with open(path + 'word_freq20200317.json', 'r', encoding="utf-8") as f:
+with open(path + 'word_freq20200325.json', 'r', encoding="utf-8") as f:
     json_data = json.load(f)
 
 
@@ -204,7 +204,7 @@ class FindPurpose:
                                 sun_day = today + timedelta(days=-today.weekday() + 6, weeks=2)  # 일요일
                                 mon_qu = "startdate between '" + mon_day.strftime("%Y.%m.%d") + \
                                          "' and '" + sun_day.strftime("%Y.%m.%d") + "' or "
-                                title += word + ',' + token[token_idx + 1][0] + ','
+                                title += word + token[token_idx + 1][0] + ','
                                 date_query += mon_qu  # 조건 한줄 씩 추가
                             if token[token_idx+1][0] == '음달':    #다다음주 물어 봤을 경우
                                 st_month = (datetime(int(year), int(month), 1) + relativedelta(months=2)).strftime("%Y.%m.%d")

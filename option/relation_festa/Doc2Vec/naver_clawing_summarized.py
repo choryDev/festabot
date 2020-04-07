@@ -54,8 +54,8 @@ class Naver_blog_clawer:
             else:
                 blog_total = math.ceil(response_body_dict['total'] / int(display))
 
-                if blog_total >= 150:
-                    blog_count = 150
+                if blog_total >= 200:
+                    blog_count = 200
                 else:
                     blog_count = blog_total
 
@@ -171,3 +171,5 @@ for id, title in db_obj:
         print(v)
         file.write(v[2]+'␞'+str(id)+'\n')
 file.close()
+
+print("hello world")

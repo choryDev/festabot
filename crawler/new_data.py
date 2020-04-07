@@ -9,7 +9,6 @@ import pymysql
 import overlap_db as odb
 import make_db as mdb
 import pandas as pd
-from sqlalchemy import create_engine
 
 url_list = []  # 상세페이지 url
 srcpath_text = []  # 사진
@@ -31,8 +30,10 @@ def new_data(region, code):
     count = 0
     page = 1
     now = dt.now()
-    url = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code)+'&srchStdt=' +\
-          now.strftime('%Y%m%d') + '&srchEddt=&srchTxt=&pageIndex='+str(page)
+    url = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code) + '&srchStdt=20130101' + \
+          '&srchEddt=' + str(int(now.strftime('%Y%m%d')) + 10000) + '&srchTxt=&pageIndex=' + str(page)
+    # url = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code)+'&srchStdt=' +\
+    #       now.strftime('%Y%m%d') + '&srchEddt=' + str(int(now.strftime('%Y%m%d'))+10000)+'&srchTxt=&pageIndex='+str(page)
     resp = requests.get(url)  # request 객체로 만듦
     html_doc = resp.text
     soup = BeautifulSoup(html_doc, 'html.parser')  # 뷰티풀소프 인자값 지정
@@ -45,8 +46,10 @@ def new_data(region, code):
         maxpage = int(allpage)//6+1
 
     while page <= maxpage:
-       url2 = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code)+'&srchStdt=' +\
-          now.strftime('%Y%m%d') + '&srchEddt=&srchTxt=&pageIndex='+str(page)
+       url2 = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code) + '&srchStdt=20130101' + \
+              '&srchEddt=' + str(int(now.strftime('%Y%m%d')) + 10000) + '&srchTxt=&pageIndex=' + str(page)
+       # url2 = 'http://www.gov.kr/portal/vfnews?srchSttusCls=FOR&srchAddrCd={}'.format(code)+'&srchStdt=' +\
+       #    now.strftime('%Y%m%d') + '&srchEddt=' + str(int(now.strftime('%Y%m%d'))+10000)+'&srchTxt=&pageIndex='+str(page)
        resp2 = requests.get(url2)  # request 객체로 만듦
        html_doc = resp2.text
        soup = BeautifulSoup(html_doc, 'html.parser')
@@ -55,6 +58,7 @@ def new_data(region, code):
        for dttag in dttags:
        #제목 가져오기
          title = dttag.find('a').text
+         title = re.sub(r'\[[^)]*\]', '', title)
 
        #url 가져오기
          base_url = 'http://www.gov.kr/'
@@ -83,7 +87,9 @@ def detail_page(url):
     page_html = page_resp.text  # html
     detail_soup = BeautifulSoup(page_html, 'html.parser')  # beautifulsoup 객체
     content = detail_soup.find(class_='contents')  # contents 클래스 찾기
-    title_text.append(detail_soup.find(class_="no-bullet").text)  # 타이틀
+    cleand_title = detail_soup.find(class_="no-bullet").text
+    cleand_title = re.sub(r'\[[^)]*\]', '', cleand_title)
+    title_text.append(cleand_title)  # 타이틀
     content = detail_soup.find('dl', class_="board-view-detail")
 
     # 날짜
@@ -208,7 +214,8 @@ def make_db():
     columns = ['id', 'region', 'title', 'host', 'tel', 'link', 'startdate', 'enddate', 'place', 'address', 'content',
                'img', 'getX', 'getY']
     # df = pd.DataFrame(data, columns)
-    mdb.make_db(data, columns)
+    print(data)
+    mdb.make_db(data)
 
 
     print(title_text)
@@ -243,8 +250,7 @@ area_text = ['1100000000', '2600000000', '2700000000', '2800000000', '2900000000
              '4500000000', '4600000000', '4700000000', '4800000000', '5000000000']
 
 def start():
- for i in range(0, len(region_name)):
-  new_data(region_name[i], area_text[i])
+ new_data(region_name[0], area_text[0])
  make_db()
 # new_data(region_name[0], area_text[0])
 
