@@ -23,7 +23,7 @@ date = datetime.today().strftime("%d")
 
 path = '/home/ubuntu/festabot/festa_list/purpose_classification/word_freq_dir/'
 # with open('word_freq_dir/word_freq' + str(int(datetime.today().strftime("%Y%m%d"))-1) + '.json', 'r', encoding="utf-8") as f:
-with open(path + 'word_freq20200325.json', 'r', encoding="utf-8") as f:
+with open(path + 'word_freq20200408.json', 'r', encoding="utf-8") as f:
     json_data = json.load(f)
 
 

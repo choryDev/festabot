@@ -4,7 +4,7 @@ import json
 import math
 import sys
 import os
-import datetime
+from datetime import datetime
 import requests
 import urllib.request
 import urllib.error

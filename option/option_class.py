@@ -58,49 +58,28 @@ class Option:
 
     def get_restaurant(self):
         restaurant_list = []
-        items_list = [] 
 
         query = 'select getX, getY from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
         data = DBconncter().select_query(query)
 
-        datalist = list(data[0]) 
+        datalist = list(data[0])
 
         restaurant_list = get_restaurant_list(datalist)
-
-        for i in range(5): #지역마다 추가
-            items_list.append(
-                {
-                    "title": restaurant_list[i]['상호명'],
-                    "description": restaurant_list[i]['주소'],
-                    # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
-
-                    "link": {
-                            "web": "daummaps://look?p=" + restaurant_list[i]['y'] + "," + restaurant_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
-                        }
-                }
-            )
-        return ui.restaurant_ui(datalist, items_list, restaurant_list)
+        print("[SERVER] Get %d item(s)" % len(restaurant_list))
+        for d in restaurant_list:
+            print(d)
+        return ui.restaurant_ui(datalist, restaurant_list)
 
     def get_cafe(self):
         cafe_list = []
-        items_list = [] 
 
         query = 'select getX, getY from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
         data = DBconncter().select_query(query)
-
+        
         datalist = list(data[0]) 
 
         cafe_list = get_cafe_list(datalist)
-
-        for i in range(5): #imageUrl은 대체이미지 찾을 때 까지 비활성
-            items_list.append(
-                {
-                    "title": cafe_list[i]['상호명'],
-                    "description": cafe_list[i]['주소'],
-                    # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
-                    "link": {
-                        "web": "daummaps://look?p=" + cafe_list[i]['y'] + "," + cafe_list[i]['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
-                    }
-                }
-            )
-        return ui.cafe_ui(datalist, items_list, cafe_list)
+        print("[SERVER] Get %d item(s)" % len(cafe_list))
+        for d in cafe_list:
+            print(d)
+        return ui.cafe_ui(datalist, cafe_list)

@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from festa_list.festa_description.festa_description import FestaDescription
 from festa_list.festa_list import FestaList
 from option.option_classification import Optionclassification
+from option.kakao_vision_api.kakao_picture_find import picture_find
 from ui import ui
 from common.DBconncter import DBconncter
 import sys
@@ -17,13 +18,17 @@ def Keyboard():
 def Message():
     req = request.get_json()
     user_token = req['userRequest']['user']['properties']['plusfriendUserKey']
-    query = "select * from user_tb where user_token = '" + str(user_token)+ "' "
-    db_obj = DBconncter().select_query(query)
-    dataSend = None
-    if len(db_obj) == 0:
-        dataSend = FestaList(req).main_func()
+    utterance = req['userRequest']['utterance']
+    if any(s in utterance.lower() for s in ['jpg', 'jpeg', 'bmp', 'png']):
+        dataSend = picture_find(utterance)
     else:
-        dataSend = Optionclassification(req).option_classification()
+        query = "select * from user_tb where user_token = '" + str(user_token)+ "' "
+        db_obj = DBconncter().select_query(query)
+        dataSend = None
+        if len(db_obj) == 0:
+            dataSend = FestaList(req).main_func()
+        else:
+            dataSend = Optionclassification(req).option_classification()
     return jsonify(dataSend)
 
 @app.route('/btn_more_festa_list', methods=['POST'])
@@ -40,14 +45,17 @@ def festa_description():
     dataSend = FestaDescription().main(req)
     return jsonify(dataSend)
 
-@app.route('/option_cafe_more', methods=['POST'])
-def option_cafe_more():
-    print("hello~")
-    return jsonify(dataSend)
-
-@app.route('/option_restaurant_more', methods=['POST'])
-def option_restaurant_more():
-    print("hello motherfucker")
+@app.route('/option_cafe_restaurant_more', methods=['POST'])
+def option_cafe_restaurant_more():
+    req = request.get_json()
+    list_type = req['action']["clientExtra"]["type"]
+    data_list =  req['action']["clientExtra"]["datalist"] 
+    another_list = req['action']["clientExtra"]["another_list"] 
+    dataSend = None
+    if (list_type == "cafe"):
+        dataSend = ui.cafe_ui(data_list, another_list)
+    elif (list_type == "restaurant"):
+        dataSend = ui.restaurant_ui(data_list, another_list)
     return jsonify(dataSend)
 
 if __name__ == "__main__":

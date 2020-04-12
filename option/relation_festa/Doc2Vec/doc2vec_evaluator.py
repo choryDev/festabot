@@ -4,7 +4,6 @@ from collections import defaultdict
 from gensim.models import Doc2Vec
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
-from common.DBconncter import DBconncter
 
 class Doc2VecEvaluator:
 
@@ -21,8 +20,3 @@ class Doc2VecEvaluator:
                     'score': score}
             list.append(obj)
         return list
-
-    def get_movie_title(self, festa_id):
-        query = 'select title from festival_tb where id = '+festa_id
-        title = DBconncter().select_query(query)[0][0]
-        return title
