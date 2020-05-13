@@ -4,15 +4,20 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from common.DBconncter import DBconncter
+from common.common_stopwords import CommonStopwords
 from ui import ui
-from datetime import datetime
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './')))
 from region_ota_checker.region_checker import region_translater, region_check_flg
 from date_checker.date_checker import DateChecker
 from tf_idf.tf_idf import tf_idf_checker
 from purpose_classification.find_purpose import FindPurpose
-year = datetime.today().strftime("%Y")
-month = datetime.today().strftime("%m")
+
+okt = Okt()
+stopword = CommonStopwords()
+month_words = ['일월', '이월', '삼월', '사월', '오월', '육월', '칠월', '팔월', '구월', '십월', '십일월', '십이월']
+date_words = ['월', '화요일', '일요일', '수요일', '음주', '토요일', '달', '수', '금', '금요일', '다다', '주말', '목', '목요일', '토', '다음', '월요일', '이번', '화', '다음주', '일', '음달']
+region_words = stopword.stop_words_region() + stopword.stop_words_region_sub()
+date_region_words = date_words + region_words + month_words
 
 class FestaList:
 
@@ -20,53 +25,25 @@ class FestaList:
         self.sentence = req['userRequest']['utterance']
         self.user = req['userRequest']['user']['id']
 
-    def easy_list(stem_list):
-        month_query = ""
-        region_check = 0
-        region_list = ""
-        word = ""
-        query = 'select * from (select * from festival_tb where enddate > sysdate()) A where ' #기본 쿼리
-        for v in stem_list:
-            if v[1] == 'Number' and v[0][len(v[0])-1] == '월':    #숫자를 나타내는 ex) 1월 1일
-                word += v[0]+','
-                v = v[0][0:len(v[0])-1]
-                if len(v) == 1:  #한자릿 수 일 경우 앞에 0붙임 두자릿수면 그냥 한다 ex) 11, 12
-                    v = '0' + v
-                mon_qu = "startdate between '"+year+"."+ v +".01' and '"+year+"."+ v +".31' or "
-                month_query += mon_qu #조건 한줄 씩 추가
+    def tokenizer_check(self, list):  #형태소 분석해서 문장이 들어온지 단어만 들어온지 체크
+        return len(list) == len([a for a in list if a[1] in ["Noun", "Determiner", "Number", "Modifier"]]) #단어만 들어 왔을때 true
 
-            if v[1] == 'Noun':
-                if DateChecker.month_check(v[0]):   #월 인지 체크
-                    month = DateChecker.month_generater(v[0])
-                    mon_qu = "startdate between '" + year + "." + month + ".01' and '" + year + "." + month + ".31' or "
-                    month_query += mon_qu  # 조건 한줄 씩 추가
-                else:
-                    v = region_translater(v[0])     #지역인지 체크
-                    word += v+','
-                    region_check += 1
-                    region_list += "'"+v+"',"
-
-        if month_query != "" : query += "("+month_query[0:len(month_query) - 3]+")" #where절에 마지막 and를 날린다  #날짜를 쿼리에 넣음
-
-        if region_check != 0:
-            if month_query != "": query += "and region in ("+region_list[0:len(region_list)-1]+")"   #조건 한줄 추가 #and region in ('부산','서울')
-            else: query += " region in ("+region_list[0:len(region_list)-1]+")"   #조건 한줄 추가 #where region in ('부산','서울')
-
-        db_obj = DBconncter().select_query(query)
-        if len(db_obj) == 0:    # 찾았는데 없을 경우 길이가 0 개
-            return ui.none_festa_list_ui(word[0:len(word) - 1])
+    def easy_sentence_checker(self): #지역 또는 날짜만 말한 경우인지 체커
+        token_list = okt.pos(
+            self.sentence,
+            norm=True,  # normalize 그랰ㅋㅋ -> 그래ㅋㅋ
+            stem=True,  # stemming 바뀌나->바뀌다
+        )
+        print(token_list)
+        if FestaList.tokenizer_check(self, token_list): #형태소 분석해서 문장이 들어온지 단어만 들어온지 체크
+            nouns_list = okt.nouns(self.sentence)
+            return len(nouns_list) == len([a for a in nouns_list if a in date_region_words]) #명사 중에 날짜, 지역만 말하였는지 체크
         else:
-            return ui.festa_list_ui(db_obj[0:5], db_obj[5:], word[0:len(word) - 1])
+            return False
 
     def main_func(self): #형태소 겟수 세는 함수
-        okt = Okt()
-        counter = 0
-        stem_list = okt.pos(self.sentence)
-        for v in stem_list:
-            if v[1] == 'Number' or region_check_flg(v[0]) or DateChecker.month_check(v[0]): #월 지역 만 물어봤을 경우
-                counter +=1
-        if counter == len(stem_list):               #지역, 월 만 입력 했을 경우
-            return FestaList.easy_list(stem_list)
+        if FestaList.easy_sentence_checker(self):
+            return FindPurpose(self.sentence).main()
         elif tf_idf_checker(self.sentence):
             return FindPurpose(self.sentence).main()
         else:

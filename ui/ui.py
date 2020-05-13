@@ -109,6 +109,18 @@ def festa_description(db_obj):
                             }
                         ]
                     }
+                },
+                {
+                    "simpleText" : {
+                        "text" : "다른 축제를 검색하시려면 '나가기'라고 입력하시거나 아래 '나가기'버튼을 눌러주세요."
+                    }
+                }
+            ],
+            "quickReplies":[
+                {
+                    "label": '나가기',
+                    "action": "message",
+                    "messageText": '나가기'
                 }
             ]
         }
@@ -194,35 +206,57 @@ def parkinglot_ui(datalist): #주차장UI
     }
     return dataSend
 
-def weather_ui(fest_mon, weatherlist):
-    dataSend = {
-        "version": "2.0",
-        "template": {
-            "outputs": [
-                {
-                        "simpleText": {
-                        "text": str(fest_mon.tm_mon) + "월 " + str(weatherlist[0][0]) + "의 날씨는 " + str(weatherlist[0][fest_mon.tm_mon]) + "입니다."
+def weather_ui(start_date, end_date, weatherDBlist, placeXY):
+    from datetime import datetime, timedelta
+    import os, sys
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../option/open_weather_api/')))
+    from get_openweather_api import get_weekly_weather
+
+    current_date = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0) #오늘 날짜
+
+    print("시작날짜", start_date, "- 금일 날짜", current_date, '=', (start_date-current_date).days)
+    
+    if (start_date - current_date).days > 7: #축제 시작일이 금일을 기준으로 openWeather 최대 예보일(금일이후 7일)을 넘어갈 때
+        dataSend = {
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                        {
+                            "simpleText": {
+                            "text": "상세 날씨는 축제 시작 1 주일 전 부터 조회가 되어 평년 날씨를 알려드릴게요."
+                        }
+                    },
+                    {
+                            "simpleText": {
+                            "text": str(start_date.month) + "월 " + str(weatherDBlist[0][0]) + "의 평년 날씨는 " + str(weatherDBlist[0][start_date.month]) + "입니다."
+                        }
                     }
-                }
-            ]
+                ]
+            }
         }
-    }
+    else:
+        weekly_weather = get_weekly_weather(placeXY)
+        print(weekly_weather[0]['temp']['day'])
     return dataSend
+
+
+
+
 
 def restaurant_ui(datalist, restaurant_list):
     items_list = []
     for obj in restaurant_list[:5]: #지역마다 추가
-            items_list.append(
-            {
-                "title": obj['상호명'],
-                "description": obj['주소'],
-                # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
-
-                "link": {
-                        "web": "daummaps://look?p=" + obj['y'] + "," + obj['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
-                    }
-            }
+        items_list.append(
+        {
+            "title": obj['상호명'],
+            "description": obj['주소'],
+            # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
+            "link": {
+                    "web": "daummaps://look?p=" + obj['y'] + "," + obj['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
+                }
+        }
         )
+
     dataSend = {
         "version": "2.0",
         "template": {

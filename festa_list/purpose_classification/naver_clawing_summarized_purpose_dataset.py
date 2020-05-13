@@ -7,6 +7,7 @@ import os
 from datetime import datetime
 import requests
 import urllib.request
+from urllib.request import HTTPError
 import urllib.error
 import urllib.parse
 from bs4 import BeautifulSoup
@@ -81,17 +82,22 @@ class Naver_blog_clawer:
 
     # 블로그의 내용을 가져오는 함수
     def get_blog_post(self, query, display, start_index, sort):
+        response_code = 0
         encode_query = urllib.parse.quote(query)
         search_url = "https://openapi.naver.com/v1/search/blog?query=" + encode_query + "&display=" + str(
             display) + "&start=" + str(start_index) + "&sort=" + sort
-
+        
         request = urllib.request.Request(search_url)
 
         request.add_header("X-Naver-Client-Id", naver_client_id)
         request.add_header("X-Naver-Client-Secret", naver_client_secret)
-
-        response = urllib.request.urlopen(request)
-        response_code = response.getcode()
+        print('###############################################################################################################')
+        try:
+            response = urllib.request.urlopen(request)
+            response_code = response.getcode()
+        except HTTPError as e:
+            code = e.getcode()
+            print(code)
 
         if response_code is 200:
             response_body = response.read()

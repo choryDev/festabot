@@ -33,8 +33,8 @@ def doc2vec(corpus_fname, output_fname):
     model = Doc2Vec(corpus, vector_size=100)
     model.save(output_fname)
 
-corpus_fname = '/home/ubuntu/festabot/option/relation_festa/Doc2Vec/dataset/naver_doc2vec_dataset2020.03.23.txt'
-output_fname = '/home/ubuntu/festabot/option/relation_festa/Doc2Vec/model/naver_doc2vec_dataset2020.03.23.model'
+corpus_fname = '/home/ubuntu/festabot/option/relation_festa/Doc2Vec/dataset/naver_doc2vec_dataset2020.05.12.txt'
+output_fname = '/home/ubuntu/festabot/option/relation_festa/Doc2Vec/model/naver_doc2vec_dataset2020.05.12.model'
 doc2vec(corpus_fname, output_fname)
 
 
