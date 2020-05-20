@@ -9,6 +9,7 @@ import requests
 import urllib.request
 import urllib.error
 import urllib.parse
+from urllib.request import HTTPError
 from bs4 import BeautifulSoup
 from textrank import KeysentenceSummarizer
 from konlpy.tag import Okt
@@ -54,8 +55,8 @@ class Naver_blog_clawer:
             else:
                 blog_total = math.ceil(response_body_dict['total'] / int(display))
 
-                if blog_total >= 200:
-                    blog_count = 200
+                if blog_total >= 300:
+                    blog_count = 300
                 else:
                     blog_count = blog_total
 
@@ -76,7 +77,6 @@ class Naver_blog_clawer:
             if(blog_post_content=="" or blog_post_content==" " ):
                 continue
             if len(blog_post_content) > 25:
-                time.sleep(0.2)
                 print(blog_post_content)
                 self.all_blog_post_text.append(blog_post_content)
 
@@ -90,9 +90,13 @@ class Naver_blog_clawer:
 
         request.add_header("X-Naver-Client-Id", naver_client_id)
         request.add_header("X-Naver-Client-Secret", naver_client_secret)
-
-        response = urllib.request.urlopen(request)
-        response_code = response.getcode()
+        
+        try:
+            response = urllib.request.urlopen(request)
+            response_code = response.getcode()
+        except HTTPError as e:
+            code = e.getcode()
+            print(code)
 
         if response_code is 200:
             response_body = response.read()
@@ -166,10 +170,10 @@ file = open('dataset/naver_doc2vec_dataset'+time_title+'.txt','w')
 for id, title in db_obj:
     print(title)
     sents = Naver_blog_clawer(title).main()
-    keysents = summarizer.summarize(sents, topk=200)
+    keysents = summarizer.summarize(sents, topk=400)
     for v in keysents:
         print(v)
         file.write(v[2]+'␞'+str(id)+'\n')
 file.close()
 
-print("hello world")
+print("the end")

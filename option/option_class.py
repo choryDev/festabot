@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pymysql, os, sys
-from time import strptime
+# from time import strptime
+from datetime import datetime
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './kakao_map_api')))
 from get_kakaomap_api import get_restaurant_list, get_cafe_list
 
@@ -38,23 +39,26 @@ class Option:
         return ui.parkinglot_ui(datalist)
 
     def get_weather(self):
-        query = 'select region, title, address, startdate, enddate from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
+        query = 'select region, title, address, startdate, enddate, getX, getY from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
         data = DBconncter().select_query(query)
 
-        festlist = list(data[0]) #festlist[0] == region festlist[1] == title ... festlist[4] == getY
+        festlist = list(data[0]) 
         
         query = 'select * from weather_tb where region like "' + str(festlist[0]) + '";'
         data = DBconncter().select_query(query)
 
-        weatherlist = list(data)
+        weatherDBlist = list(data)
         print(festlist) #monitoring
 
         feststartdate, festenddate = festlist[3], festlist[4] #혹시 몰라 끝나는날까지 추출
-        print(feststartdate,festenddate) #시작일, 마지막날 모니터링
 
-        fest_mon = strptime(feststartdate,"%Y.%m.%d")
+        placeXY = {'x' : festlist[5], 'y' : festlist[6]}
 
-        return ui.weather_ui(fest_mon, weatherlist)
+        start_date = datetime.strptime(feststartdate,"%Y.%m.%d")
+        end_date = datetime.strptime(festenddate,"%Y.%m.%d")
+        print("Transformed date : start - ", start_date, "end - ", end_date)
+        
+        return ui.weather_ui(start_date, end_date, weatherDBlist, placeXY)
 
     def get_restaurant(self):
         restaurant_list = []
