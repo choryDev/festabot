@@ -106,7 +106,7 @@ def festa_description(db_obj):
                         "title": db_obj[2],
                         "description": desc,
                         "thumbnail": {
-                            "imageUrl": db_obj[11]
+                            "imageUrl": db_obj[15]
                         },
                         "profile": {
                             "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM",
@@ -181,6 +181,11 @@ def address_ui(datalist): #주소UI
                     "action": "webLink",
                     "label": "지도로 자동차 길찾기",
                     "webLinkUrl": "daummaps://route?sp=35.1516077265, 129.1173479525&ep=" + str(datalist[3]) + "," + str(datalist[4]) + "&by=CAR"
+                    },
+                    {
+                    "action": "webLink",
+                    "label": "지도로 대중교통 길찾기",
+                    "webLinkUrl": "daummaps://route?sp=35.1516077265, 129.1173479525&ep=" + str(datalist[3]) + "," + str(datalist[4]) + "&by=PUBLICTRANSIT"
                     }
                 ]
                 }
@@ -392,18 +397,32 @@ def empty_items_ui(sel): #추천 맛집이나 카페가 없을 때 출력할 fun
     }
     return dataSend
 
-def popular_festa_ui(fest_list, datalist):
+def popular_festa_ui(result_list):
+    another_list = result_list[5:len(result_list)]
+    result_list = result_list[:5]
     items_list = []
+    quickReplies = []
 
-    for i in range(len(fest_list[:5])):
+    for idx, val in enumerate(result_list):
         items_list.append(
             {
-                "title": datalist[i][0],
-                "description": datalist[i][1],
-                "imageUrl": datalist[i][2]
+                "title": str(idx+1)+'.'+val[1],
+                "description": val[2],
+                "imageUrl": val[3],
+                "link": {
+                    "web": val[4]
+                },
             }
         )
-
+        quickReplies.append({
+                "label": '축제' +  str(idx+1),
+                "action": "block",
+                "blockId": "5e50dad192690d00014efe09",
+                  "extra": {
+                      "id": val[0],
+                  }
+            }
+        )
     dataSend = {
         "version": "2.0",
         "template": {
@@ -420,18 +439,64 @@ def popular_festa_ui(fest_list, datalist):
                     },
                     "items": items_list,
                     "buttons": [
-                        None if len(fest_list[5:len(fest_list)]) == 0 else {
+                        None if len(another_list) == 0 else {
                             "label": "더보기",
                             "action": "block",
                             "blockId": "5eccb6eb7a9c4b00010632ed",
                             "extra": {
-                                "another_list" : fest_list[5:len(fest_list)],
-                                "datalist" : datalist[5:len(datalist)]
+                                "another_list" : another_list,
                             }
                         }
                     ]
                 }
             }
+            ],
+            "quickReplies": quickReplies
+        }
+    }
+    return dataSend
+
+def keyword_place_ui(datalist, keyword):
+    items_list = []
+    for obj in datalist[:5]: #지역마다 추가
+        items_list.append(
+            {
+                "title": obj['상호명'],
+                "description": obj['주소'],
+                "link": {
+                    "web": obj['url']
+                }
+            }
+        )
+    dataSend = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                "listCard": {
+                    "header": {
+                        "title": "반경 5km 내"+keyword +"😊"
+                    },
+                    "items": items_list,
+                    # "buttons": [
+                    #     {
+                    #         "label": "지도로 보기",
+                    #         "action": "webLink",
+                    #         "webLinkUrl" : "daummaps://search?q=카페&p=" + str(datalist[0]) + "," + str(datalist[1])
+                    #     },
+                    #     None if len(cafe_list[5:len(cafe_list)]) == 0 else {
+                    #         "label": "더보기",
+                    #         "action": "block",
+                    #         "blockId": "5e7077b22d3cd0000121a040",
+                    #         "extra": {
+                    #             "type":"cafe",
+                    #             "another_list" : cafe_list[5:len(cafe_list)],
+                    #             "datalist": datalist
+                    #         }
+                    #     }
+                    # ]
+                }
+                }
             ]
         }
     }
@@ -447,7 +512,7 @@ def word2vec_recommed_ui(title_arr, sim_obj_list):
                 "blockId": "5e4feb4e8192ac00015843f1",
                  "extra": {
                      "another_festa_list": v['festa_list'],
-                     "word": title
+                     "word": v['word']
                 }
             }
         btn_list.append(btn)

@@ -71,9 +71,7 @@ def option_weather_more():
 def option_popular_more():
     req = request.get_json()
     another_list = req['action']['clientExtra']['another_list']
-    datalist = req['action']["clientExtra"]["datalist"]
-
-    dataSend = ui.popular_festa_ui(another_list , datalist)
+    dataSend = ui.popular_festa_ui(another_list)
 
     return jsonify(dataSend)
 

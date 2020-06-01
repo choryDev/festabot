@@ -36,3 +36,564 @@ fit_transform, (sentence 250, feature 55)
 219.249.231.40 - - [18/Mar/2020 09:08:49] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
 219.249.231.40 - - [18/Mar/2020 09:08:50] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
 219.249.231.40 - - [18/Mar/2020 09:08:52] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+2020-06-01 08:21:15.880865: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+fit_transform, (sentence 250, feature 55)
+ * Serving Flask app "main" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Using TensorFlow backend.
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+219.249.231.41 - - [01/Jun/2020 08:21:20] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:21:26] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:21:31] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:32] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:21:36] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:39] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:51] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:54] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:54] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:21:56] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:22:04] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:22:08] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:22:09] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:22:28] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:22:31] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:22:52] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:22:59] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:23:05] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:23:08] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:23:09] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:24:26] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:24:36] "[37mPOST /message HTTP/1.1[0m" 200 -
+[('나가다', 'Verb')]
+[('7월', 'Number'), ('대구', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.07.01' and '2020.07.31' ) and region in ('대구') 
+[('부산', 'Noun')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('부산') 
+[('7월', 'Number'), ('대구', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.07.01' and '2020.07.31' ) and region in ('대구') 
+[('6월', 'Number'), ('축제', 'Noun')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.06.01' and '2020.06.31' ) 
+[('맥주', 'Noun'), ('한잔', 'Noun'), ('하다', 'Verb'), ('수', 'Noun'), ('있다', 'Adjective'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where ((startdate < '2020.06.03' and enddate > '2020.06.03')) and(id = 376 or id = 469 or id = 1042 ) 
+맥주
+음료
+생맥주
+[('나가다', 'Verb')]
+()
+()
+((1493, '전남', '곡성 세계장미축제 2020', '곡성군', '0613638379 0613608348', 'http://www.gov.kr/portal/vfnews/80467?srchSttusCls=ALL&srchAddrCd=4600000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.05.22', '2020.06.07', '곡성섬진강기차마을', '전라남도 곡성군 오곡면 기차마을로 232', '1. 제10회 곡성세계 장미축제 개막식 : 5.23.(토) 18:00 중앙무대 / 폐막공연 : 6.7.(일) 18:00 중앙무대  2. 제2회 아시안월드컵페스티벌, 제6회 월드요들페스티벌, 아시아전통오케스트라3. 외국인 재즈 뮤직콘서트, 공개수배 사람찾기 이벤트, 음식에 장미를 더하다 특별전시관 등 4. 제1회 곡성 맛자랑대회, 장미 빛을 품다, 컬러홀릭 장미빛 바다의 유혹, 골든로즈존 Music of Rose light 5. 행운의 황금장미 이벤트, 중세유럽 의상체험, 컬러풀 외국인 길거리 퍼포먼스 등 6. 젊음과 낭만이 있는 포토존 운영(버스킹공연, Pub운영), 세계전통 민속놀이 체험 등 참여형 프로그램 다수 [부대행사]장미꽃길걷기, 기차당 뚝방마켓, 청년챌린지 마켓 등  [프로그램]1. 증기기관차, 레일바이크, 낙죽장도, 짚풀공예 전시장, 드림랜드, 기차마을 생태학습관, VR체험, 치치뿌뿌 놀이터2. 요술랜드, 4D영상 체험, 체험프로그램 17종 등 ', 'https://tong.visitkorea.or.kr/cms/resource/76/2644476_image2_1.PNG', '35.2775251245', '127.3082920334', None, 'http://k.kakaocdn.net/dn/lTi14/btqEqtDmzcQ/fGlxD1LLJ8gEIS3gakJ9P0/img.jpg'),)
+흑맥주
+과자
+[('광안', 'Noun'), ('리', 'Noun'), ('축제', 'Noun'), ('없다', 'Adjective'), ('~', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (id = 371 or id = 372 or id = 378 or id = 372 or id = 1814 ) 
+()
+커피
+한잔
+독한
+어젯밤
+봄비
+볼게요
+~♡
+[('부산', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('부산') 
+[('콜라', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+콜라
+코카
+암바사
+버드와이저
+롯데칠성
+음료
+bFjrHdMQz60d유저 토큰
+[('나가다', 'Verb')]
+[('서울', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('서울') 
+[('7월', 'Number'), ('강원도', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.07.01' and '2020.07.31' ) and region in ('강원') 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[5.4053706e-04 9.9798501e-01 3.7837210e-05 4.9430062e-04 7.9358468e-04
+ 4.4517015e-05 1.0408076e-04] 맛집
+[5.4053706e-04 9.9798501e-01 3.7837210e-05 4.9430062e-04 7.9358468e-04
+ 4.4517015e-05 1.0408076e-04]
+11
+[SERVER] Get 15 item(s)
+{'상호명': '유동커피', 'y': '33.2445258834582', '주소': '제주특별자치도 서귀포시 서귀동 581-4', 'x': '126.563800348044'}
+{'상호명': '바다를본돼지 서귀포점', 'y': '33.2430314956821', '주소': '제주특별자치도 서귀포시 서귀동 42', 'x': '126.567563246454'}
+{'상호명': '오는정김밥', 'y': '33.2495955703083', '주소': '제주특별자치도 서귀포시 서귀동 254-6', 'x': '126.567621058572'}
+{'상호명': '동해미락', 'y': '33.2436721658595', '주소': '제주특별자치도 서귀포시 서귀동 72-1', 'x': '126.568229644502'}
+{'상호명': '쌍둥이횟집', 'y': '33.2465677180323', '주소': '제주특별자치도 서귀포시 서귀동 496-18', 'x': '126.562927484565'}
+{'상호명': '다정이네', 'y': '33.249384593855005', '주소': '제주특별자치도 서귀포시 서귀동 255-7', 'x': '126.56684519419963'}
+{'상호명': '영빈횟집', 'y': '33.243256185362256', '주소': '제주특별자치도 서귀포시 서귀동 68-6', 'x': '126.56787545493502'}
+{'상호명': '덕성원 본점', 'y': '33.2449103742997', '주소': '제주특별자치도 서귀포시 서귀동 474', 'x': '126.563399276303'}
+{'상호명': '88버거', 'y': '33.2492440116698', '주소': '제주특별자치도 서귀포시 서귀동 255-9', 'x': '126.567124885703'}
+{'상호명': '하루비커피', 'y': '33.24242263737046', '주소': '제주특별자치도 서귀포시 서귀동 21-1', 'x': '126.56671214766897'}
+{'상호명': '센트로', 'y': '33.2466488975268', '주소': '제주특별자치도 서귀포시 서귀동 172-4', 'x': '126.567579770359'}
+{'상호명': '솔동산고기국수', 'y': '33.2429439991024', '주소': '제주특별자치도 서귀포시 서귀동 724-5', 'x': '126.565224554451'}
+{'상호명': '안거리밖거리', 'y': '33.244234813358', '주소': '제주특별자치도 서귀포시 서귀동 584-3', 'x': '126.564102235957'}
+{'상호명': '탐라갈치', 'y': '33.2449248963193', '주소': '제주특별자치도 서귀포시 서귀동 90-1', 'x': '126.56963557503'}
+{'상호명': '서귀포괸당네', 'y': '33.243056800617104', '주소': '제주특별자치도 서귀포시 서귀동 42', 'x': '126.56758028975183'}
+alTVQcsxf7kF유저 토큰
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.7185445e-04 5.3319476e-05 9.9630249e-01 2.0263565e-03 8.2223763e-04
+ 7.0310966e-06 6.1673234e-04] 연관
+[1.7185445e-04 5.3319476e-05 9.9630249e-01 2.0263565e-03 8.2223763e-04
+ 7.0310966e-06 6.1673234e-04]
+11
+{'score': 0.6528019905090332, 'id': '1035'}
+{'score': 0.593804121017456, 'id': '620'}
+{'score': 0.5765610933303833, 'id': '1584'}
+{'score': 0.543974757194519, 'id': '1038'}
+{'score': 0.5260190963745117, 'id': '6'}
+{'score': 0.5123960375785828, 'id': '5'}
+{'score': 0.5112446546554565, 'id': '1299'}
+{'score': 0.5035693645477295, 'id': '1298'}
+{'score': 0.4990368187427521, 'id': '10'}
+{'score': 0.4940743148326874, 'id': '1404'}
+[{'score': 0.6528019905090332, 'id': '1035'}, {'score': 0.593804121017456, 'id': '620'}, {'score': 0.5765610933303833, 'id': '1584'}, {'score': 0.543974757194519, 'id': '1038'}, {'score': 0.5260190963745117, 'id': '6'}, {'score': 0.5123960375785828, 'id': '5'}, {'score': 0.5112446546554565, 'id': '1299'}, {'score': 0.5035693645477295, 'id': '1298'}, {'score': 0.4990368187427521, 'id': '10'}, {'score': 0.4940743148326874, 'id': '1404'}]
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.00276198 0.00662765 0.54918325 0.07697427 0.35767248 0.0013815
+ 0.00539877] 연관
+[0.00276198 0.00662765 0.54918325 0.07697427 0.35767248 0.0013815
+ 0.00539877]
+-1
+[('다음주', 'Noun'), ('대구', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb'), ('?', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.06.08' and '2020.06.14' ) and region in ('대구') 219.249.231.42 - - [01/Jun/2020 08:24:55] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:02] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:09] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:25:13] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:18] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:23] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:25] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:25:25] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:38] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:25:41] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:25:41] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:25:49] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:26:01] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+[2020-06-01 08:26:06,614] ERROR in app: Exception on /message [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "main.py", line 31, in Message
+    dataSend = Optionclassification(req).option_classification()
+  File "/home/ubuntu/festabot/option/option_classification.py", line 44, in option_classification
+    return RelationOption(self.requset_obj).get_list()
+  File "/home/ubuntu/festabot/option/relation_festa/relation_option.py", line 29, in get_list
+    sim_list = RelationOption.most_similar(self)
+  File "/home/ubuntu/festabot/option/relation_festa/relation_option.py", line 22, in most_similar
+    return model.most_similar(self.id, topn = 10)
+  File "/home/ubuntu/festabot/option/relation_festa/Doc2Vec/doc2vec_evaluator.py", line 17, in most_similar
+    similar_movies = self.model.docvecs.most_similar(festa_id, topn=topn)
+  File "/usr/local/lib/python3.5/dist-packages/gensim/models/keyedvectors.py", line 1719, in most_similar
+    raise KeyError("doc '%s' not in trained set" % doc)
+KeyError: "doc '1042' not in trained set"
+219.249.231.41 - - [01/Jun/2020 08:26:06] "[1m[35mPOST /message HTTP/1.1[0m" 500 -
+219.249.231.41 - - [01/Jun/2020 08:26:08] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+[2020-06-01 08:26:13,253] ERROR in app: Exception on /message [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.5/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "main.py", line 31, in Message
+    dataSend = Optionclassification(req).option_classification()
+  File "/home/ubuntu/festabot/option/option_classification.py", line 44, in option_classification
+    return RelationOption(self.requset_obj).get_list()
+  File "/home/ubuntu/festabot/option/relation_festa/relation_option.py", line 29, in get_list
+    sim_list = RelationOption.most_similar(self)
+  File "/home/ubuntu/festabot/option/relation_festa/relation_option.py", line 22, in most_similar
+    return model.most_similar(self.id, topn = 10)
+  File "/home/ubuntu/festabot/option/relation_festa/Doc2Vec/doc2vec_evaluator.py", line 17, in most_similar
+    similar_movies = self.model.docvecs.most_similar(festa_id, topn=topn)
+  File "/usr/local/lib/python3.5/dist-packages/gensim/models/keyedvectors.py", line 1719, in most_similar
+    raise KeyError("doc '%s' not in trained set" % doc)
+KeyError: "doc '1406' not in trained set"
+219.249.231.41 - - [01/Jun/2020 08:26:13] "[1m[35mPOST /message HTTP/1.1[0m" 500 -
+219.249.231.41 - - [01/Jun/2020 08:26:19] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:26:30] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:26:31] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:26:37] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:26:48] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:26:50] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:27:02] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:27:06] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:27:06] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:27:17] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:28:24] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:28:27] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:28:41] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:28:51] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:28:54] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:29:14] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:29:45] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:29:53] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:29:56] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:30:00] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:30:09] "[37mPOST /message HTTP/1.1[0m" 200 -
+
+A3j6augbLWel유저 토큰
+[('다음', 'Noun'), ('달', 'Noun'), ('대구', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where ((startdate < '2020.07.01' and enddate > '2020.07.30')) and region in ('대구') 
+[('버스', 'Noun'), ('타고', 'Noun'), ('갈껀데', 'Noun'), ('전주', 'Noun'), ('에', 'Josa'), ('축제', 'Noun'), ('없다', 'Adjective'), ('?', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('전북') 
+[('다다', 'Noun'), ('음달', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where ((startdate < '2020.08.01' and enddate > '2020.08.30')) 
+[('여수', 'Noun'), ('축제', 'Noun'), ('에', 'Josa'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('전북') 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[4.5252126e-03 1.4477068e-03 8.5920471e-01 1.2669626e-01 6.5171449e-03
+ 3.5996808e-04 1.2491009e-03] 연관
+[4.5252126e-03 1.4477068e-03 8.5920471e-01 1.2669626e-01 6.5171449e-03
+ 3.5996808e-04 1.2491009e-03]
+11
+alTVQcsxf7kF유저 토큰
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.7185445e-04 5.3319476e-05 9.9630249e-01 2.0263565e-03 8.2223763e-04
+ 7.0310966e-06 6.1673234e-04] 연관
+[1.7185445e-04 5.3319476e-05 9.9630249e-01 2.0263565e-03 8.2223763e-04
+ 7.0310966e-06 6.1673234e-04]
+11
+[('울산', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('울산') 
+[('재밌다', 'Adjective'), ('축제', 'Noun')]
+[('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+[('전주대', 'Noun'), ('사', 'Modifier'), ('습', 'Noun'), ('놀이', 'Suffix')]
+[('전주대', 'Noun'), ('사', 'Modifier'), ('습', 'Noun'), ('놀이', 'Suffix'), ('검색', 'Noun'), ('해주다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('전북') and(id = 1405 ) 
+bFjrHdMQz60d유저 토큰
+[('즐겁다', 'Adjective'), ('축제', 'Noun')]
+[('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb'), ('?', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+[('부산', 'Noun'), ('에서', 'Josa'), ('열리다', 'Verb'), ('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('부산') and(id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[7.4637926e-04 2.2578936e-03 4.1735411e-04 3.8779058e-04 9.8801672e-01
+ 6.5873587e-03 1.5865635e-03] 주소
+[7.4637926e-04 2.2578936e-03 4.1735411e-04 3.8779058e-04 9.8801672e-01
+ 6.5873587e-03 1.5865635e-03]
+11
+[('신나다', 'Adjective'), ('축제', 'Noun')]
+[('가족', 'Noun'), ('끼리', 'Noun'), ('갈다', 'Verb'), ('한', 'Determiner'), ('축제', 'Noun')]
+가족
+사랑
+부모
+아이
+애환
+((1492, '전남', '녹동바다불꽃축제 2020', '녹동청년회의소, 녹동JC특우회', '0618422811', 'http://www.gov.kr/portal/vfnews/80400?srchSttusCls=ALL&srchAddrCd=4600000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.06.18', '2020.06.21', '녹동항 일대(구항)', '전라남도 고흥군 도양읍 녹동신항2길 9', '* 프로그램 : 식전공연, 개막식 축하쇼, 소록도주민위안잔치, 불꽃가요제, 지역예술단공연, 청소년 끼 페스티벌, 고흥군 수협과 함께하는 한마당 큰잔치(맨손물고기잡기, 싱싱행운다트 등), 점화퍼포먼스/멀티미디어 불꽃 쇼(4일간) 등* 부대행사 : VR체험, 4D체험 및 각종 체험 프로그램', 'https://tong.visitkorea.or.kr/cms/resource/44/2648244_image2_1.JPG', '34.5251818772', '127.1418394295', None, 'http://k.kakaocdn.net/dn/jQ9Zt/btqEqrFw3rn/WWAzFQjttNGh8pikPK5hN0/img.jpg'),)
+((1492, '전남', '녹동바다불꽃축제 2020', '녹동청년회의소, 녹동JC특우회', '0618422811', 'http://www.gov.kr/portal/vfnews/80400?srchSttusCls=ALL&srchAddrCd=4600000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.06.18', '2020.06.21', '녹동항 일대(구항)', '전라남도 고흥군 도양읍 녹동신항2길 9', '* 프로그램 : 식전공연, 개막식 축하쇼, 소록도주민위안잔치, 불꽃가요제, 지역예술단공연, 청소년 끼 페스티벌, 고흥군 수협과 함께하는 한마당 큰잔치(맨손물고기잡기, 싱싱행운다트 등), 점화퍼포먼스/멀티미디어 불꽃 쇼(4일간) 등* 부대행사 : VR체험, 4D체험 및 각종 체험 프로그램', 'https://tong.visitkorea.or.kr/cms/resource/44/2648244_image2_1.JPG', '34.5251818772', '127.1418394295', None, 'http://k.kakaocdn.net/dn/jQ9Zt/btqEqrFw3rn/WWAzFQjttNGh8pikPK5hN0/img.jpg'), (1579, '경북', '무섬외나무다리축제 2020', '영주시 / (재)영주문화관광재단', '0546308703', 'http://www.gov.kr/portal/vfnews/80402?srchSttusCls=ALL&srchAddrCd=4700000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.10', '2020.10.11', '영주시 무섬마을', '경상북도 영주시 문수면 무섬로234번길 41', '마을 대항 씨름대회, 농악한마당, 사또행차, 과객 맞이하기, 쟁기지고 소몰고 건너기, 소풀지고 장분이 지고 건너기소 갈비짐 지고 건너기, 말타고 장가가기, 전통혼례식, 장례행렬(상여메기), 참석자 전원 다리 건너기 체험 등', 'https://tong.visitkorea.or.kr/cms/resource/77/1685077_image3_1.jpg', '36.7316057476', '128.6213025371', None, 'http://k.kakaocdn.net/dn/bSO1zw/btqEpJmpaUx/Z6w0F9RAhMBV7LxlCtJ2v0/img.jpg'))
+알콩달콩
+끼리
+서로
+오순도순
+((1402, '전북', ' 순창장류축제 2020', '순창군', '0636529301 0636501611', 'http://www.gov.kr/portal/vfnews/80674?srchSttusCls=ALL&srchAddrCd=4500000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.16', '2020.10.18', '순창전통고추장민속마을', '전라북도 순창군 순창읍 민속마을길 6-3', '천혜의 자연환경과 장류문화의 역사가 살아 숨쉬는 고장 순창!대한민국의 대표 먹거리 고추장의 본 고장 순창에서 장류를 테마로 다양한 체험거리와 볼거리, 푸짐한 먹거리로 순창고추장민속마을 일원에서 제 15회 순창장류축제를 개최한다. 군민에게는 문화향유의 기회제공과 관광객에게는 장류의 맛과 멋을 제공하고 잊혀져가는 전통장류문화를 재조명하기 위해 시작한 순창장류축제는 문화체육관광부 유망축제로 선정되었다. 다양한 체험과 공연, 경연, 전시 프로그램을 준비하여 방문객이 직접 참여하고 함께 즐길 수 있는 화합의 축제, 남녀노소 누구나 즐길 수 있는 세대공감형 축제로 준비되었다.', 'https://tong.visitkorea.or.kr/cms/resource/71/2384371_image2_1.jpg', '35.3753190513', '127.1133178783', None, 'http://k.kakaocdn.net/dn/b9tnnb/btqEq7z2cmz/aX930vJdAKkr0FkekcUT81/img.jpg'),)
+친해져서
+틀려
+따로
+alTVQcsxf7kF유저 토큰
+A3j6augbLWel유저 토큰
+[('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb'), ('?', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[3.6151474e-04 3.7015541e-03 9.1680167e-03 5.6895898e-03 8.6361927e-01
+ 8.7811843e-02 2.9648159e-02]219.249.231.40 - - [01/Jun/2020 08:30:14] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:30:15] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:30:19] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:30:22] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:30:29] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:30:30] "[37mPOST /message HTTP/1.1[0m" 200 -
+ 주소
+[3.6151474e-04 3.7015541e-03 9.1680167e-03 5.6895898e-03 8.6361927e-01
+ 8.7811843e-02 2.9648159e-02]
+11
+result =  ('35.3753190513', '127.1133178783')
+[('부산', 'Noun'), ('에서', 'Josa'), ('열리다', 'Verb'), ('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('부산') and(id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.43906504 0.14784063 0.19980317 0.04843123 0.11410018 0.00294977
+ 0.04780993] 날씨
+[0.43906504 0.14784063 0.19980317 0.04843123 0.11410018 0.00294977
+ 0.04780993]
+-1
+alTVQcsxf7kF유저 토큰
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04] 주소
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04]
+11
+result =  ('35.3753190513', '127.1133178783')
+{'distance': '3084', 'road_address_name': '전북 순창군 순창읍 복실길 13-28', 'id': '13326850', 'phone': '', 'x': '127.138613007937', 'place_url': 'http://place.map.kakao.com/13326850', 'category_name': '문화,예술 > 종교 > 기독교 > 교회', 'y': '35.3938619603849', 'category_group_name': '', 'address_name': '전북 순창군 순창읍 복실리 512', 'place_name': '생명길교회', 'category_group_code': ''}
+{'distance': '3681', 'road_address_name': '', 'id': '25190316', 'phone': '', 'x': '127.146609395809', 'place_url': 'http://place.map.kakao.com/25190316', 'category_name': '여행 > 관광,명소 > 계곡', 'y': '35.3942346821397', 'category_group_name': '관광명소', 'address_name': '전북 순창군 순창읍 장덕리', 'place_name': '길음목골', 'category_group_code': 'AT4'}
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04] 주소
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04]
+11
+result =  ('35.1537908369', '129.1184922375')
+{'distance': '694', 'road_address_name': '부산 수영구 무학로64번길 39', 'id': '1604871580', 'phone': '051-753-9663', 'x': '129.121449886888', 'place_url': 'http://place.map.kakao.com/1604871580', 'category_name': '음식점 > 카페 > 테마카페 > 디저트카페', 'y': '35.1595553424868', 'category_group_name': '카페', 'address_name': '부산 수영구 민락동 158-6', 'place_name': '길', 'category_group_code': 'CE7'}
+{'distance': '228', 'road_address_name': '부산 수영구 광안로 20', 'id': '1217915160', 'phone': '051-758-1230', 'x': '129.116626580001', 'place_url': 'http://place.map.kakao.com/1217915160', 'category_name': '음식점 > 분식', 'y': '35.155170032577', 'category_group_name': '음식점', 'address_name': '부산 수영구 광안동 1330', 'place_name': '명품김밥쉐프길', 'category_group_code': 'FD6'}
+{'distance': '596', 'road_address_name': '부산 수영구 수영로510번길 30', 'id': '27532400', 'phone': '', 'x': '129.112969930733', 'place_url': 'http://place.map.kakao.com/27532400', 'category_name': '문화,예술 > 미술,공예', 'y': '35.1509047499169', 'category_group_name': '', 'address_name': '부산 수영구 광안동 186-17', 'place_name': '510번길 다락', 'category_group_code': ''}
+{'distance': '979', 'road_address_name': '부산 수영구 민락본동로 7', 'id': '700899501', 'phone': '010-6332-2605', 'x': '129.128138294744', 'place_url': 'http://place.map.kakao.com/700899501', 'category_name': '문화,예술 > 사진 > 사진관,포토스튜디오', 'y': '35.1576717368999', 'category_group_name': '', 'address_name': '부산 수영구 민락동 772', 'place_name': '러브에비뉴&사랑길사진관 본점', 'category_group_code': ''}
+{'distance': '1001', 'road_address_name': '', 'id': '21605008', 'phone': '', 'x': '129.129376716228', 'place_url': 'http://place.map.kakao.com/21605008', 'category_name': '교통,수송 > 도로시설 > 도로명', 'y': '35.1550041948078', 'category_group_name': '', 'address_name': '부산 수영구 민락동 113-44', 'place_name': '광안해변로326번길', 'category_group_code': ''}
+{'distance': '1873', 'road_address_name': '부산 수영구 연수로 385', 'id': '737684160', 'phone': '', 'x': '129.111966205576', 'place_url': 'http://place.map.kakao.com/737684160', 'category_name': '교육,학문 > 학습시설 > 도서관 > 작은도서관', 'y': '35.1697959782238', 'category_group_name': '', 'address_name': '부산 수영구 수영동 456-13', 'place_name': '바람길작은도서관', 'category_group_code': ''}
+{'distance': '1747', 'road_address_name': '부산 수영구 연수로 399', 'id': '24207610', 'phone': '051-757-0989', 'x': '129.113181283672', 'place_url': 'http://place.map.kakao.com/24207610', 'category_name': '부동산 > 부동산서비스 > 부동산중개업소', 'y': '35.1689132789402', 'category_group_name': '중개업소', 'address_name': '부산 수영구 수영동 451-11', 'place_name': '길공인중개사사무소', 'category_group_code': 'AG2'}
+{'distance': '1568', 'road_address_name': '부산 수영구 수영로 759', 'id': '11673545', 'phone': '051-752-0460', 'x': '129.122333955561', 'place_url': 'http://place.map.kakao.com/11673545', 'category_name': '서비스,산업 > 디자인', 'y': '35.1675636847765', 'category_group_name': '', 'address_name': '부산 수영구 수영동 518', 'place_name': '디자인길', 'category_group_code': ''}
+{'distance': '3177', 'road_address_name': '', 'id': '13113670', 'phone': '', 'x': '129.084332689617', 'place_url': 'http://place.map.kakao.com/13113670', 'category_name': '여행 > 관광,명소', 'y': '35.1594933731776', 'category_group_name': '', 'address_name': '부산 연제구 연산동 산 180-10', 'place_name': '황령산벚꽃길', 'category_group_code': ''}
+{'distance': '1775', 'road_address_name': '부산 수영구 수영로741번길 38', 'id': '24205823', 'phone': '', 'x': '129.121084167351', 'place_url': 'http://place.map.kakao.com/24205823', 'category_name': '가정,생활 > 미용 > 체형관리', 'y': '35.1696402030952', 'category_group_name': '', 'address_name': '부산 수영구 수영동 432-1', 'place_name': '고은길에스테틱', 'category_group_code': ''}
+{'distance': '2621', 'road_address_name': '부산 수영구 과정로41번길 20', 'id': '1898305154', 'phone': '0507-1320-4997', 'x': '129.10639932647', 'place_url': 'http://place.map.kakao.com/1898305154', 'category_name': '의료,건강 > 약국', 'y': '35.1752169495798', 'category_group_name': '약국', 'address_name': '부산 수영구 망미동 442-12', 'place_name': '41번길약국', 'category_group_code': 'PM9'}
+{'distance': '2293', 'road_address_name': '부산 남구 수영로 332', 'id': '15266871', 'phone': '051-624-9811', 'x': '129.102129137431', 'place_url': 'http://place.map.kakao.com/15266871', 'category_name': '문화,예술 > 미술,공예 > 화방', 'y': '35.1380915223781', 'category_group_name': '', 'address_name': '부산 남구 대연동 54-12', 'place_name': '길화방액자', 'category_group_code': ''}
+{'distance': '2621', 'road_address_name': '부산 수영구 과정로41번길 20', 'id': '921397431', 'phone': '0507-1320-4997', 'x': '129.1063993264699', 'place_url': 'http://place.map.kakao.com/921397431', 'category_name': '이슈 > 공적마스크판매처', 'y': '35.175216949579784', 'category_group_name': '', 'address_name': '부산 수영구 망미동 442-12', 'place_name': '41번길약국 공적판매처', 'category_group_code': ''}
+{'distance': '3786', 'road_address_name': '부산 해운대구 해운대로 620', 'id': '1634783395', 'phone': '051-747-3642', 'x': '129.158493248291', 'place_url': 'http://place.map.kakao.com/1634783395', 'category_name': '가정,생활 > 꽃집,꽃배달', 'y': '35.1629775069977', 'category_group_name': '', 'address_name': '부산 해운대구 우동 539-10', 'place_name': '꽃길', 'category_group_code': ''}
+{'distance': '2750', 'road_address_name': '부산 해운대구 센텀중앙로 145', 'id': '26068890', 'phone': '051-744-0774', 'x': '129.1224257348', 'place_url': 'http://place.map.kakao.com/26068890', 'category_name': '음식점 > 분식', 'y': '35.1783542247313', 'category_group_name': '음식점', 'address_name': '부산 해운대구 재송동 1200', 'place_name': '세프길', 'category_group_code': 'FD6'}219.249.231.42 - - [01/Jun/2020 08:30:54] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:32:36] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:32:55] "[37mPOST /message HTTP/1.1[0m" 200 -
+2020-06-01 08:36:01.700888: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+fit_transform, (sentence 250, feature 55)
+ * Serving Flask app "main" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Using TensorFlow backend.
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+219.249.231.42 - - [01/Jun/2020 08:36:23] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:36:34] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:36:40] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:36:45] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:36:47] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:36:50] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:36:54] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:37:02] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:37:07] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:37:27] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:37:37] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:37:42] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:37:49] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:37:52] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:01] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:06] "[37mPOST /message HTTP/1.1[0m" 200 -
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[5.0960056e-04 1.2308095e-03 2.2456719e-04 9.9197852e-05 9.9110585e-01
+ 1.7608529e-03 5.0690896e-03] 주소
+[5.0960056e-04 1.2308095e-03 2.2456719e-04 9.9197852e-05 9.9110585e-01
+ 1.7608529e-03 5.0690896e-03]
+11
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04] 주소
+[1.5077672e-03 3.9675575e-02 4.3162410e-03 6.0185842e-02 8.8070214e-01
+ 1.2769009e-02 8.4340788e-04]
+11
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[7.4637926e-04 2.2578936e-03 4.1735411e-04 3.8779058e-04 9.8801672e-01
+ 6.5873587e-03 1.5865635e-03] 주소
+[7.4637926e-04 2.2578936e-03 4.1735411e-04 3.8779058e-04 9.8801672e-01
+ 6.5873587e-03 1.5865635e-03]
+11
+[('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb'), ('?', 'Punctuation')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.55024964 0.15440032 0.03622388 0.04898141 0.1690715  0.02731445
+ 0.01375885] 날씨
+[0.55024964 0.15440032 0.03622388 0.04898141 0.1690715  0.02731445
+ 0.01375885]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.0168043  0.01597763 0.00338442 0.00189486 0.94321024 0.00754059
+ 0.01118791] 주소
+[0.0168043  0.01597763 0.00338442 0.00189486 0.94321024 0.00754059
+ 0.01118791]
+-1
+result =  ('35.3753190513', '127.1133178783')
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.01661442 0.04264579 0.05941577 0.01793502 0.8326945  0.00616289
+ 0.02453169] 주소
+[0.01661442 0.04264579 0.05941577 0.01793502 0.8326945  0.00616289
+ 0.02453169]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.01051343 0.96152866 0.00108951 0.00521682 0.01817118 0.00143126
+ 0.00204905] 맛집
+[0.01051343 0.96152866 0.00108951 0.00521682 0.01817118 0.00143126
+ 0.00204905]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.3941937  0.18277265 0.04626372 0.04322939 0.24471392 0.02484941
+ 0.0639772 ] 날씨
+[0.3941937  0.18277265 0.04626372 0.04322939 0.24471392 0.02484941
+ 0.0639772 ]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[5.4053706e-04 9.9798501e-01 3.7837210e-05 4.9430062e-04 7.9358468e-04
+ 4.4517015e-05 1.0408076e-04] 맛집
+[5.4053706e-04 9.9798501e-01 3.7837210e-05 4.9430062e-04 7.9358468e-04
+ 4.4517015e-05 1.0408076e-04]
+11
+[SERVER] Get 15 item(s)
+{'상호명': '산경가든', '주소': '전북 순창군 팔덕면 구룡리 550-45', 'x': '127.107899796167', 'y': '35.378538317355'}
+{'상호명': '순흥즉석순두부가든', '주소': '전북 순창군 순창읍 백산리 297-6', 'x': '127.11512424959', 'y': '35.3696734075764'}
+{'상호명': '성가정식당', '주소': '전북 순창군 순창읍 백산리 840', 'x': '127.110199021832', 'y': '35.3698041852016'}
+{'상호명': '구룡가든', '주소': '전북 순창군 팔덕면 구룡리 85', 'x': '127.110634655289', 'y': '35.3793866963502'}
+{'상호명': '순창예찬', '주소': '전북 순창군 순창읍 백산리 265-49', 'x': '127.108217408006', 'y': '35.3658437377479'}
+{'상호명': '명가원식당', '주소': '전북 순창군 순창읍 백산리 818-1', 'x': '127.106224929737', 'y': '35.3702403812103'}
+{'상호명': '참풍천장어', '주소': '전북 순창군 팔덕면 구룡리 550-83', 'x': '127.10988029174256', 'y': '35.378208449738246'}
+{'상호명': '신평가든', '주소': '전북 순창군 팔덕면 구룡리 162', 'x': '127.109591963408', 'y': '35.3798419150242'}
+{'상호명': '강천보양탕', '주소': '전북 순창군 순창읍 백산리 306-1', 'x': '127.117267284755', 'y': '35.3692927893214'}
+{'상호명': '구룡별관', '주소': '전북 순창군 팔덕면 구룡리 85-3', 'x': '127.110616475944', 'y': '35.3789684975607'}
+{'상호명': '순창토종흑염소전문점', '주소': '전북 순창군 순창읍 백산리 260-10', 'x': '127.1128901576', 'y': '35.3694772231612'}
+{'상호명': '방랑싸롱', '주소': '전북 순창군 순창읍 교성리 188-1', 'x': '127.12912282334105', 'y': '35.373343886832245'}
+{'상호명': '리던 강천산휴게소 광주방향점', '주소': '전북 순창군 순창읍 백산리 743', 'x': '127.105871334285', 'y': '35.365748472348'}
+{'상호명': '베르자르당', '주소': '전북 순창군 순창읍 교성리 408-9', 'x': '127.14185441602366', 'y': '35.36605589942265'}
+{'상호명': '원조옥천골한정식', '주소': '전북 순창군 순창읍 교성리 394-21', 'x': '127.1400350041', 'y': '35.3708476764048'}
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[1.0374545e-02 4.7279643e-03 4.6333363e-03 1.7316866e-04 2.1183077e-02
+ 1.4047277e-04 9.5876741e-01] 카페
+[1.0374545e-02 4.7279643e-03 4.6333363e-03 1.7316866e-04 2.1183077e-02
+ 1.4047277e-04 9.5876741e-01]
+11
+[SERVER] Get 15 item(s)
+{'상호명': '방랑싸롱', '주소': '전북 순창군 순창읍 교성리 188-1', 'x': '127.12912282334105', 'y': '35.373343886832245'}
+{'상호명': '리던 강천산휴게소 광주방향점', '주소': '전북 순창군 순창읍 백산리 743', 'x': '127.105871334285', 'y': '35.365748472348'}
+{'상호명': '베르자르당', '주소': '전북 순창군 순창읍 교성리 408-9', 'x': '127.14185441602366', 'y': '35.36605589942265'}
+{'상호명': '카페오늘', '주소': '전북 순창군 순창읍 교성리 57-1', 'x': '127.136389382132', 'y': '35.372849187056'}
+{'상호명': '일우당', '주소': '전북 순창군 순창읍 순화리 235-2', 'x': '127.140890973303', 'y': '35.3745565433259'}
+{'상호명': '떼루아', '주소': '전북 순창군 순창읍 순화리 482-14', 'x': '127.136928123599', 'y': '35.3764755165985'}
+{'상호명': '카페J', '주소': '전북 순창군 순창읍 가남리 545-25', 'x': '127.14040647024629', 'y': '35.367396062272654'}
+{'상호명': '이디야커피 순창점', '주소': '전북 순창군 순창읍 남계리 542-2', 'x': '127.14245254033', 'y': '35.3739309944108'}
+{'상호명': '코코앤카카', '주소': '전북 순창군 순창읍 남계리 222', 'x': '127.142921162473', 'y': '35.3750805339111'}
+{'상호명': '금산객잔', '주소': '전북 순창군 순창읍 순화리 229', 'x': '127.140788916302', 'y': '35.3740879723701'}
+{'상호명': '순창농부의부엌', '주소': '전북 순창군 순창읍 순화리 219', 'x': '127.140998938006', 'y': '35.37335945541'}
+{'상호명': '케냐에스프레소', '주소': '전북 순창군 순창읍 남계리 207-1', 'x': '127.143280118632', 'y': '35.3764393091738'}
+{'상호명': '어린왕자카페', '주소': '전북 순창군 순창읍 교성리 393-6', 'x': '127.14012015212424', 'y': '35.37108823208005'}
+{'상호명': '강천휴게소', '주소': '전북 순창군 팔덕면 용산리 648', 'x': '127.094762938286', 'y': '35.3927361982995'}
+{'상호명': '엔제리너스 순창D/I점', '주소': '전북 순창군 순창읍 교성리 394-6', 'x': '127.14075986445', 'y': '35.3700320343435'}
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]219.249.231.42 - - [01/Jun/2020 08:38:20] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:38:25] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:38:27] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:30] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:38:37] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:40] "[37mPOST /festa_description HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:44] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:38:50] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:39:07] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:39:11] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:39:16] "[37mPOST /btn_more_festa_list HTTP/1.1[0m" 200 -
+
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056] 날씨
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056]
+-1
+[('부산', 'Noun'), ('에서', 'Josa'), ('열리다', 'Verb'), ('해변', 'Noun'), ('가', 'Josa'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where  region in ('부산') and(id = 371 or id = 372 or id = 378 or id = 379 or id = 667 or id = 727 or id = 1306 or id = 1578 or id = 1817 or id = 1818 ) 
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056] 날씨
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056] 날씨
+[0.38252193 0.17487268 0.05393061 0.03595177 0.26916987 0.02074258
+ 0.06281056]
+-1
+alTVQcsxf7kF유저 토큰
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105] 날씨
+[0.7991341  0.09071223 0.01147939 0.00697715 0.0658958  0.00477022
+ 0.02103105]
+-1
+['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
+[9.9608374e-01 1.0596730e-03 3.4786269e-04 3.8437016e-04 1.1218645e-03
+ 7.6101668e-04 2.4145223e-04] 날씨
+[9.9608374e-01 1.0596730e-03 3.4786269e-04 3.8437016e-04 1.1218645e-03
+ 7.6101668e-04 2.4145223e-04]
+11
+Transformed date : start -  2020-11-07 00:00:00 end -  2020-11-07 00:00:00
+시작날짜 2020-11-07 00:00:00 - 금일 날짜 2020-06-01 00:00:00 = 159
+[('6월', 'Number'), ('축제', 'Noun'), ('알다', 'Verb')]
+select * from (select * from festival_tb where enddate > sysdate()) A where (startdate between '2020.06.01' and '2020.06.31' ) 
+[('이번', 'Noun'), ('달', 'Noun'), ('축제', 'Noun'), ('알다', 'Verb')]
+달
+려고요
+열흘
+((729, '경기', '의정부 음악극축제 2020', '(재)의정부예술의전당', '0318505142~8', 'http://www.gov.kr/portal/vfnews/79841?srchSttusCls=ALL&srchAddrCd=4100000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=4', '2020.07.17', '2020.07.26', '의정부예술의전당 및 시청 앞 광장', '경기도 의정부시 의정로 1', '※ 코로나바이러스감염증-19 공지사항※ 내용 : 기존 5월 축제 → 7월로 연기→ 코로나바이러스감염증-19 여행정보 변동사항 확인하기<의정부음악극축제>는 의정부예술의전당에서 주최하고, 문화체육관광부와 의정부시가 후원하는 우리나라 대표 공연예술축제로, 음악과 극이 만나는 모든 장르를 포함하는 국내 유일 음악극축제이다. 이미 세계무대에서 검증을 거친 최신경향의 음악극 및 신진예술가들의 신선한 작품, 누구나 즐길 수 있는 야외공연 등 세대와 지역을 아우르는 다채로운 음악극을 선보이며 긍정적으로 평가 받아 왔으며 워크숍, 음악극어워드, 관객과의 대화 등을 지속적으로 개최함으로써 공연예술축제로서의 기능을 강화해나가고 있다.', 'https://tong.visitkorea.or.kr/cms/resource/84/2589884_image2_1.jpg', '37.7334330545', '127.0340500917', None, 'http://k.kakaocdn.net/dn/7IJB8/btqEoUWelAH/v1kT33RMEtVJe29x3u1UYK/img.jpg'),)
+((729, '경기', '의정부 음악극축제 2020', '(재)의정부예술의전당', '0318505142~8', 'http://www.gov.kr/portal/vfnews/79841?srchSttusCls=ALL&srchAddrCd=4100000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=4', '2020.07.17', '2020.07.26', '의정부예술의전당 및 시청 앞 광장', '경기도 의정부시 의정로 1', '※ 코로나바이러스감염증-19 공지사항※ 내용 : 기존 5월 축제 → 7월로 연기→ 코로나바이러스감염증-19 여행정보 변동사항 확인하기<의정부음악극축제>는 의정부예술의전당에서 주최하고, 문화체육관광부와 의정부시가 후원하는 우리나라 대표 공연예술축제로, 음악과 극이 만나는 모든 장르를 포함하는 국내 유일 음악극축제이다. 이미 세계무대에서 검증을 거친 최신경향의 음악극 및 신진예술가들의 신선한 작품, 누구나 즐길 수 있는 야외공연 등 세대와 지역을 아우르는 다채로운 음악극을 선보이며 긍정적으로 평가 받아 왔으며 워크숍, 음악극어워드, 관객과의 대화 등을 지속적으로 개최함으로써 공연예술축제로서의 기능을 강화해나가고 있다.', 'https://tong.visitkorea.or.kr/cms/resource/84/2589884_image2_1.jpg', '37.7334330545', '127.0340500917', None, 'http://k.kakaocdn.net/dn/7IJB8/btqEoUWelAH/v1kT33RMEtVJe29x3u1UYK/img.jpg'), (1243, '충북', '보은 대추축제 2020', '보은군', '0435403392', 'http://www.gov.kr/portal/vfnews/80005?srchSttusCls=ALL&srchAddrCd=4300000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.16', '2020.10.25', '보은읍 뱃들공원', '충청북도 보은군 보은읍 뱃들로 54', '공      연 : 개막축하공연, 영동난계국악단 공연, 제4회 보은전국국악경연대회 전국어린이문화예술축제 등체험행사 : 무형문화재 시연 및 체험, 보은사과수확체험, 대추홍보주제관, 특산물 홍보전 등  부대행사 : 먹거리장터, 향토음식 품평회, 대추카트 등연계행사 :제14회 전국민속소싸움대회, 보은군민의 날 등', 'https://tong.visitkorea.or.kr/cms/resource/17/2649817_image2_1.JPG', '36.4863477960', '127.7232423965', None, 'http://k.kakaocdn.net/dn/WyGFF/btqErLcroIF/ixDPlj6IiXy3sgvRBCA7M0/img.jpg'))
+((729, '경기', '의정부 음악극축제 2020', '(재)의정부예술의전당', '0318505142~8', 'http://www.gov.kr/portal/vfnews/79841?srchSttusCls=ALL&srchAddrCd=4100000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=4', '2020.07.17', '2020.07.26', '의정부예술의전당 및 시청 앞 광장', '경기도 의정부시 의정로 1', '※ 코로나바이러스감염증-19 공지사항※ 내용 : 기존 5월 축제 → 7월로 연기→ 코로나바이러스감염증-19 여행정보 변동사항 확인하기<의정부음악극축제>는 의정부예술의전당에서 주최하고, 문화체육관광부와 의정부시가 후원하는 우리나라 대표 공연예술축제로, 음악과 극이 만나는 모든 장르를 포함하는 국내 유일 음악극축제이다. 이미 세계무대에서 검증을 거친 최신경향의 음악극 및 신진예술가들의 신선한 작품, 누구나 즐길 수 있는 야외공연 등 세대와 지역을 아우르는 다채로운 음악극을 선보이며 긍정적으로 평가 받아 왔으며 워크숍, 음악극어워드, 관객과의 대화 등을 지속적으로 개최함으로써 공연예술축제로서의 기능을 강화해나가고 있다.', 'https://tong.visitkorea.or.kr/cms/resource/84/2589884_image2_1.jpg', '37.7334330545', '127.0340500917', None, 'http://k.kakaocdn.net/dn/7IJB8/btqEoUWelAH/v1kT33RMEtVJe29x3u1UYK/img.jpg'), (1243, '충북', '보은 대추축제 2020', '보은군', '0435403392', 'http://www.gov.kr/portal/vfnews/80005?srchSttusCls=ALL&srchAddrCd=4300000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.16', '2020.10.25', '보은읍 뱃들공원', '충청북도 보은군 보은읍 뱃들로 54', '공      연 : 개막축하공연, 영동난계국악단 공연, 제4회 보은전국국악경연대회 전국어린이문화예술축제 등체험행사 : 무형문화재 시연 및 체험, 보은사과수확체험, 대추홍보주제관, 특산물 홍보전 등  부대행사 : 먹거리장터, 향토음식 품평회, 대추카트 등연계행사 :제14회 전국민속소싸움대회, 보은군민의 날 등', 'https://tong.visitkorea.or.kr/cms/resource/17/2649817_image2_1.JPG', '36.4863477960', '127.7232423965', None, 'http://k.kakaocdn.net/dn/WyGFF/btqErLcroIF/ixDPlj6IiXy3sgvRBCA7M0/img.jpg'), (1294, '충남', '금산 인삼축제 2020', '금산군', '0417504147', 'http://www.gov.kr/portal/vfnews/80605?srchSttusCls=ALL&srchAddrCd=4400000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.09', '2020.10.18', '금산인삼관 광장 및 인삼약초거리 일원', '충청남도 금산군 금산읍 인삼광장로 30', '건강체험관, 인삼캐기체험, 국제인삼교역전, 세계중요농업유산관, 인삼아트거리, 건강댄스경연, 전국주부가요제, 인삼왕선발대회, 금산인삼 힐링콘서트, 금산전통민속공연, 10개 읍면 길놀이 등 60여개의 체험, 공연경연, 전시교역, 학술프로그램 운영', 'https://tong.visitkorea.or.kr/cms/resource/58/2620958_image2_1.jpg', '36.1001573782', '127.5012088646', None, 'http://k.kakaocdn.net/dn/BldZf/btqEsqFFr7J/ngYVW3FYMsNlvdaByWgCE1/img.jpg'))
+((729, '경기', '의정부 음악극축제 2020', '(재)의정부예술의전당', '0318505142~8', 'http://www.gov.kr/portal/vfnews/79841?srchSttusCls=ALL&srchAddrCd=4100000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=4', '2020.07.17', '2020.07.26', '의정부예술의전당 및 시청 앞 광장', '경기도 의정부시 의정로 1', '※ 코로나바이러스감염증-19 공지사항※ 내용 : 기존 5월 축제 → 7월로 연기→ 코로나바이러스감염증-19 여행정보 변동사항 확인하기<의정부음악극축제>는 의정부예술의전당에서 주최하고, 문화체육관광부와 의정부시가 후원하는 우리나라 대표 공연예술축제로, 음악과 극이 만나는 모든 장르를 포함하는 국내 유일 음악극축제이다. 이미 세계무대에서 검증을 거친 최신경향의 음악극 및 신진예술가들의 신선한 작품, 누구나 즐길 수 있는 야외공연 등 세대와 지역을 아우르는 다채로운 음악극을 선보이며 긍정적으로 평가 받아 왔으며 워크숍, 음악극어워드, 관객과의 대화 등을 지속적으로 개최함으로써 공연예술축제로서의 기능을 강화해나가고 있다.', 'https://tong.visitkorea.or.kr/cms/resource/84/2589884_image2_1.jpg', '37.7334330545', '127.0340500917', None, 'http://k.kakaocdn.net/dn/7IJB8/btqEoUWelAH/v1kT33RMEtVJe29x3u1UYK/img.jpg'), (1243, '충북', '보은 대추축제 2020', '보은군', '0435403392', 'http://www.gov.kr/portal/vfnews/80005?srchSttusCls=ALL&srchAddrCd=4300000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.16', '2020.10.25', '보은읍 뱃들공원', '충청북도 보은군 보은읍 뱃들로 54', '공      연 : 개막축하공연, 영동난계국악단 공연, 제4회 보은전국국악경연대회 전국어린이문화예술축제 등체험행사 : 무형문화재 시연 및 체험, 보은사과수확체험, 대추홍보주제관, 특산물 홍보전 등  부대행사 : 먹거리장터, 향토음식 품평회, 대추카트 등연계행사 :제14회 전국민속소싸움대회, 보은군민의 날 등', 'https://tong.visitkorea.or.kr/cms/resource/17/2649817_image2_1.JPG', '36.4863477960', '127.7232423965', None, 'http://k.kakaocdn.net/dn/WyGFF/btqErLcroIF/ixDPlj6IiXy3sgvRBCA7M0/img.jpg'), (1294, '충남', '금산 인삼축제 2020', '금산군', '0417504147', 'http://www.gov.kr/portal/vfnews/80605?srchSttusCls=ALL&srchAddrCd=4400000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.09', '2020.10.18', '금산인삼관 광장 및 인삼약초거리 일원', '충청남도 금산군 금산읍 인삼광장로 30', '건강체험관, 인삼캐기체험, 국제인삼교역전, 세계중요농업유산관, 인삼아트거리, 건강댄스경연, 전국주부가요제, 인삼왕선발대회, 금산인삼 힐링콘서트, 금산전통민속공연, 10개 읍면 길놀이 등 60여개의 체험, 공연경연, 전시교역, 학술프로그램 운영', 'https://tong.visitkorea.or.kr/cms/resource/58/2620958_image2_1.jpg', '36.1001573782', '127.5012088646', None, 'http://k.kakaocdn.net/dn/BldZf/btqEsqFFr7J/ngYVW3FYMsNlvdaByWgCE1/img.jpg'), (1493, '전남', '곡성 세계장미축제 2020', '곡성군', '0613638379 0613608348', 'http://www.gov.kr/portal/vfnews/80467?srchSttusCls=ALL&srchAddrCd=4600000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.05.22', '2020.06.07', '곡성섬진강기차마을', '전라남도 곡성군 오곡면 기차마을로 232', '1. 제10회 곡성세계 장미축제 개막식 : 5.23.(토) 18:00 중앙무대 / 폐막공연 : 6.7.(일) 18:00 중앙무대  2. 제2회 아시안월드컵페스티벌, 제6회 월드요들페스티벌, 아시아전통오케스트라3. 외국인 재즈 뮤직콘서트, 공개수배 사람찾기 이벤트, 음식에 장미를 더하다 특별전시관 등 4. 제1회 곡성 맛자랑대회, 장미 빛을 품다, 컬러홀릭 장미빛 바다의 유혹, 골든로즈존 Music of Rose light 5. 행운의 황금장미 이벤트, 중세유럽 의상체험, 컬러풀 외국인 길거리 퍼포먼스 등 6. 젊음과 낭만이 있는 포토존 운영(버스킹공연, Pub운영), 세계전통 민속놀이 체험 등 참여형 프로그램 다수 [부대행사]장미꽃길걷기, 기차당 뚝방마켓, 청년챌린지 마켓 등  [프로그램]1. 증기기관차, 레일바이크, 낙죽장도, 짚풀공예 전시장, 드림랜드, 기차마을 생태학습관, VR체험, 치치뿌뿌 놀이터2. 요술랜드, 4D영상 체험, 체험프로그램 17종 등 ', 'https://tong.visitkorea.or.kr/cms/resource/76/2644476_image2_1.PNG', '35.2775251245', '127.3082920334', None, 'http://k.kakaocdn.net/dn/lTi14/btqEqtDmzcQ/fGlxD1LLJ8gEIS3gakJ9P0/img.jpg'))
+((729, '경기', '의정부 음악극축제 2020', '(재)의정부예술의전당', '0318505142~8', 'http://www.gov.kr/portal/vfnews/79841?srchSttusCls=ALL&srchAddrCd=4100000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=4', '2020.07.17', '2020.07.26', '의정부예술의전당 및 시청 앞 광장', '경기도 의정부시 의정로 1', '※ 코로나바이러스감염증-19 공지사항※ 내용 : 기존 5월 축제 → 7월로 연기→ 코로나바이러스감염증-19 여행정보 변동사항 확인하기<의정부음악극축제>는 의정부예술의전당에서 주최하고, 문화체육관광부와 의정부시가 후원하는 우리나라 대표 공연예술축제로, 음악과 극이 만나는 모든 장르를 포함하는 국내 유일 음악극축제이다. 이미 세계무대에서 검증을 거친 최신경향의 음악극 및 신진예술가들의 신선한 작품, 누구나 즐길 수 있는 야외공연 등 세대와 지역을 아우르는 다채로운 음악극을 선보이며 긍정적으로 평가 받아 왔으며 워크숍, 음악극어워드, 관객과의 대화 등을 지속적으로 개최함으로써 공연예술축제로서의 기능을 강화해나가고 있다.', 'https://tong.visitkorea.or.kr/cms/resource/84/2589884_image2_1.jpg', '37.7334330545', '127.0340500917', None, 'http://k.kakaocdn.net/dn/7IJB8/btqEoUWelAH/v1kT33RMEtVJe29x3u1UYK/img.jpg'), (1243, '충북', '보은 대추축제 2020', '보은군', '0435403392', 'http://www.gov.kr/portal/vfnews/80005?srchSttusCls=ALL&srchAddrCd=4300000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.16', '2020.10.25', '보은읍 뱃들공원', '충청북도 보은군 보은읍 뱃들로 54', '공      연 : 개막축하공연, 영동난계국악단 공연, 제4회 보은전국국악경연대회 전국어린이문화예술축제 등체험행사 : 무형문화재 시연 및 체험, 보은사과수확체험, 대추홍보주제관, 특산물 홍보전 등  부대행사 : 먹거리장터, 향토음식 품평회, 대추카트 등연계행사 :제14회 전국민속소싸움대회, 보은군민의 날 등', 'https://tong.visitkorea.or.kr/cms/resource/17/2649817_image2_1.JPG', '36.4863477960', '127.7232423965', None, 'http://k.kakaocdn.net/dn/WyGFF/btqErLcroIF/ixDPlj6IiXy3sgvRBCA7M0/img.jpg'), (1294, '충남', '금산 인삼축제 2020', '금산군', '0417504147', 'http://www.gov.kr/portal/vfnews/80605?srchSttusCls=ALL&srchAddrCd=4400000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=1', '2020.10.09', '2020.10.18', '금산인삼관 광장 및 인삼약초거리 일원', '충청남도 금산군 금산읍 인삼광장로 30', '건강체험관, 인삼캐기체험, 국제인삼교역전, 세계중요농업유산관, 인삼아트거리, 건강댄스경연, 전국주부가요제, 인삼왕선발대회, 금산인삼 힐링콘서트, 금산전통민속공연, 10개 읍면 길놀이 등 60여개의 체험, 공연경연, 전시교역, 학술프로그램 운영', 'https://tong.visitkorea.or.kr/cms/resource/58/2620958_image2_1.jpg', '36.1001573782', '127.5012088646', None, 'http://k.kakaocdn.net/dn/BldZf/btqEsqFFr7J/ngYVW3FYMsNlvdaByWgCE1/img.jpg'), (1493, '전남', '곡성 세계장미축제 2020', '곡성군', '0613638379 0613608348', 'http://www.gov.kr/portal/vfnews/80467?srchSttusCls=ALL&srchAddrCd=4600000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.05.22', '2020.06.07', '곡성섬진강기차마을', '전라남도 곡성군 오곡면 기차마을로 232', '1. 제10회 곡성세계 장미축제 개막식 : 5.23.(토) 18:00 중앙무대 / 폐막공연 : 6.7.(일) 18:00 중앙무대  2. 제2회 아시안월드컵페스티벌, 제6회 월드요들페스티벌, 아시아전통오케스트라3. 외국인 재즈 뮤직콘서트, 공개수배 사람찾기 이벤트, 음식에 장미를 더하다 특별전시관 등 4. 제1회 곡성 맛자랑대회, 장미 빛을 품다, 컬러홀릭 장미빛 바다의 유혹, 골든로즈존 Music of Rose light 5. 행운의 황금장미 이벤트, 중세유럽 의상체험, 컬러풀 외국인 길거리 퍼포먼스 등 6. 젊음과 낭만이 있는 포토존 운영(버스킹공연, Pub운영), 세계전통 민속놀이 체험 등 참여형 프로그램 다수 [부대행사]장미꽃길걷기, 기차당 뚝방마켓, 청년챌린지 마켓 등  [프로그램]1. 증기기관차, 레일바이크, 낙죽장도, 짚풀공예 전시장, 드림랜드, 기차마을 생태학습관, VR체험, 치치뿌뿌 놀이터2. 요술랜드, 4D영상 체험, 체험프로그램 17종 등 ', 'https://tong.visitkorea.or.kr/cms/resource/76/2644476_image2_1.PNG', '35.2775251245', '127.3082920334', None, 'http://k.kakaocdn.net/dn/lTi14/btqEqtDmzcQ/fGlxD1LLJ8gEIS3gakJ9P0/img.jpg'), (1582, '경북', '안동국제탈춤페스티벌 2020', '안동시', '0548416397~8', 'http://www.gov.kr/portal/vfnews/80249?srchSttusCls=ALL&srchAddrCd=4700000000&srchStdt=20030101&srchEddt=20201231&srchTxt=&pageIndex=2', '2020.09.25', '2020.10.04', '탈춤공원, 문화의 거리 등 안동시내 일원', '경상북도 안동시 육사로 239', '안동국제탈춤페스티벌은 매년 9월 마지막 주 금요일부터 10일간 개최되는 국내 최대 전통문화 콘텐츠 축제이다. 1997년 안동의 문화를 알리기 위한 ‘탈춤페스티벌97’을 개최하여 문화체육부 ‘10대 문화관광축제’에 선정되었고, 이후 문화체육관광부에서 선정하는 ‘집중육성 축제’, ‘전국축제종합평가 1위’, ‘전국최우수 축제’, ‘대한민국 대표축제’를 거쳐 ‘2012년부터 3년 연속 ‘명예대표축제’, 2015년부터는 ‘대한민국 글로벌육성축제’로 선정되어 대한민국 최고의 축제로 명성을 유지해 오고 있다.안동국제탈춤페스티벌에서는 하회별신굿탈놀이 등 12개 중요무형문화재단체 공연과 중국, 터키, 볼리비아 등 12개국의 외국 탈춤공연을 한자리에서 즐길 수 있다. 뿐만 아니라 세계탈놀이경연대회, 미술대전, 탈놀이대동난장, 나만의 탈 만들기, 탈춤 따라 배우기 등 다양한 공연과 체험 프로그램이 운영되며, 안동민속축제가 함께 개최되어 차전놀이, 놋다리밟기 등 안동의 전통문화를 직접 느낄 수 있는 기회도 제공한다.', 'https://tong.visitkorea.or.kr/cms/resource/00/2541800_image2_1.jpg', '36.5605495777', '128.7308755359', None, 'http://k.kakaocdn.net/dn/yUmgz/btqEpH9TOJo/BwyJkks9nKcgFTwBEi5Mf0/img.jpg'))219.249.231.42 - - [01/Jun/2020 08:40:05] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:40:20] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:42:15] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:42:30] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:42:35] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:42:40] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.40 - - [01/Jun/2020 08:42:55] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:43:06] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:43:11] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:43:14] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.41 - - [01/Jun/2020 08:43:15] "[37mPOST /message HTTP/1.1[0m" 200 -
+219.249.231.42 - - [01/Jun/2020 08:43:20] "[37mPOST /message HTTP/1.1[0m" 200 -
+2020-06-01 08:43:41.018583: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+fit_transform, (sentence 250, feature 55)
+ * Serving Flask app "main" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Using TensorFlow backend.
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+219.249.231.42 - - [01/Jun/2020 08:43:48] "[37mPOST /message HTTP/1.1[0m" 200 -

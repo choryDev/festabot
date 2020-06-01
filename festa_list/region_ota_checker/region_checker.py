@@ -21,6 +21,7 @@ def region_translater(word):
     return ota_translater(word)
 
 def region_check_flg(word):
+    flag = False
     for v in obj.stop_words_region_sub()+obj.stop_words_region(): #지역이 있는지 체크
         if v in word:
             flag =  True
