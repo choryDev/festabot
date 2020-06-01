@@ -6,8 +6,8 @@ import time
 
 API_URL = "https://kapi.kakao.com/v1/vision/thumbnail/crop"
 MYAPP_KEY = '5e5acc55c8584f36abffe26633c82550'
-width = "600"
-height = "600"
+width = "800"
+height = "800"
 
 def make_thumbnail(image_url):
     headers = {'Authorization': 'KakaoAK {}'.format(MYAPP_KEY)}

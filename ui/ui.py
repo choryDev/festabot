@@ -1,3 +1,22 @@
+from datetime import datetime
+import sys, os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../option/open_weather_api/')))
+from weather_condition_dic import weather_cond_dic as wthrCondD
+
+exit_simpleText_ui = {
+    "simpleText" : {
+        "text" : "다른 축제를 검색하시려면 '나가기'라고 입력하시거나 아래 '다른축제검색하기'버튼을 눌러주세요."
+        }
+        }
+
+exit_quickreply_ui =[{
+    "label": "다른축제검색하기",
+    "action": "message",
+    "messageText": "나가기"
+    }
+    ]
+
 def none_festa_list_ui(word):
     send_data = {
         "version": "2.0",
@@ -20,7 +39,7 @@ def festa_list_ui(festa_list, another_festa_list, word):
     for v in festa_list:
         i += 1
         item = {
-                   "title": v[2],
+                   "title": str(i)+"."+v[2],
                    "description": '' if v[10]=='null' else  v[10], #만약 null 이면 빈값
                    "imageUrl": v[15],
                    "link": {
@@ -72,6 +91,12 @@ def festa_description(db_obj):
             "장소 : " + db_obj[8] + "\n" \
             "주소 : " + db_obj[9] + "\n" \
             "상제 정보 : " + db_obj[10]
+
+    if str(db_obj[4][0]).isdigit():
+        phoneNumber = str(db_obj[4])
+    else:
+        phoneNumber = ''
+
     dataSend = {
         "version": "2.0",
         "template": {
@@ -95,13 +120,13 @@ def festa_description(db_obj):
                         "buttons": [
                             {
                                 "label": "옵션보기",
-                                "action": "webLink",
-                                "webLinkUrl": "https://store.kakaofriends.com/kr/products/1542"
+                                "action": "message",
+                                "messageText": '"상세주소", "주차장조회", "맛집조회", "카페조회", "날씨"가 있습니다.\n "주소가 뭐야?"등 자유롭게 옵션을 조회해보세요'
                             },
                             {
                                 "label": "전화하기",
                                 "action": "phone",
-                                "phoneNumber": "354-86-00070"
+                                "phoneNumber": phoneNumber
                             },
                             {
                                 "label": "공유하기",
@@ -110,19 +135,9 @@ def festa_description(db_obj):
                         ]
                     }
                 },
-                {
-                    "simpleText" : {
-                        "text" : "다른 축제를 검색하시려면 '나가기'라고 입력하시거나 아래 '나가기'버튼을 눌러주세요."
-                    }
-                }
+                exit_simpleText_ui
             ],
-            "quickReplies":[
-                {
-                    "label": '나가기',
-                    "action": "message",
-                    "messageText": '나가기'
-                }
-            ]
+            "quickReplies": exit_quickreply_ui
         }
     }
     return dataSend
@@ -192,12 +207,7 @@ def parkinglot_ui(datalist): #주차장UI
                     "action": "webLink",
                     "label": "주변 주차장 지도로 보기",
                     "webLinkUrl": "daummaps://search?q=주차장&p=" + str(datalist[3]) + "," + str(datalist[4])	
-                    }#,
-                    #{
-                    #"action": "message",
-                    #"label": "카드형으로 검색",
-                    #"messageText" : "카드형으로 검색"
-                    #}
+                    }
                 ]
                 }
             }
@@ -206,19 +216,7 @@ def parkinglot_ui(datalist): #주차장UI
     }
     return dataSend
 
-def weather_ui(start_date, end_date, weatherDBlist, placeXY):
-    from datetime import datetime, timedelta
-    import os, sys
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../option/open_weather_api/')))
-    from get_openweather_api import get_weekly_weather
-    from weather_condition_dic import weather_cond_dic as wthrCondD
-    from get_weather_index import getIndexList
-
-    current_date = (datetime.now()+timedelta(hours=9)).replace(hour=0,minute=0,second=0,microsecond=0) #오늘 날짜 #서버시간은 미국기준이라 9시간더함
-
-    print("시작날짜", start_date, "- 금일 날짜", current_date, '=', (start_date-current_date).days)
-    
-    if (start_date - current_date).days > 7: #축제 시작일이 금일을 기준으로 openWeather 최대 예보일(금일이후 7일)을 넘어갈 때
+def month_weather_ui(month, weatherDBlist):
         dataSend = {
             "version": "2.0",
             "template": {
@@ -230,43 +228,56 @@ def weather_ui(start_date, end_date, weatherDBlist, placeXY):
                     },
                     {
                             "simpleText": {
-                            "text": str(start_date.month) + "월 " + str(weatherDBlist[0][0]) + "의 평년 날씨는 " + str(weatherDBlist[0][start_date.month]) + "입니다."
+                            "text": str(month) + "월 " + str(weatherDBlist[0][0]) + "의 평년 날씨는 " + str(weatherDBlist[0][month]) + "입니다."
                         }
                     }
                 ]
             }
         }
-    else: 
-        weekly_weather = get_weekly_weather(placeXY)
+        return dataSend
 
-        fest_index = getIndexList(start_date, end_date, current_date)
-        print(fest_index)
-        dataSend = {
-            "version": "2.0",
-            "template": {
-                "outputs": [
-                    {
-                    "listCard": {
-                        "header": {
-                            "title": "날씨"
-                        },
-                        "items": [
-                            {
-                                "title" : str(datetime.fromtimestamp(weekly_weather[0]['dt']).month) + "/" + str(datetime.fromtimestamp(weekly_weather[0]['dt']).day) + " " + str(wthrCondD[int(weekly_weather[0]['weather'][0]['id'])]),
-                                "description" : str(weekly_weather[0]['temp']['max'])+"°C/" + str(weekly_weather[0]['temp']['min'])+"°C",
-                                "imageUrl" : "http://openweathermap.org/img/wn/" + str(weekly_weather[0]['weather'][0]['icon']) + "@2x.png"
-                            }
-                        ]
-                    }
-                }
-                ]
+def each_weather(weekly_weather, fest_idx_list):
+    items_list = []
+    another_idx = fest_idx_list[5:len(fest_idx_list)]
+    for i in fest_idx_list[:5]:
+        items_list.append(
+            {
+                "title" : str(datetime.fromtimestamp(weekly_weather[i]['dt']).month) + "/" + str(datetime.fromtimestamp(weekly_weather[i]['dt']).day) + " " + str(wthrCondD[int(weekly_weather[i]['weather'][0]['id'])]),
+                "description" : str(weekly_weather[i]['temp']['max'])+"°C/" + str(weekly_weather[i]['temp']['min'])+"°C",
+                "imageUrl" : "http://openweathermap.org/img/wn/" + str(weekly_weather[i]['weather'][0]['icon']) + "@2x.png"
             }
+        )
+
+    dataSend = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                "listCard": {
+                    "header": {
+                        "title": "날씨"
+                    },
+                    "items": items_list,
+                    "buttons": [
+                        None if len(another_idx) == 0 else {
+                            "label": "더보기",
+                            "action": "block",
+                            "blockId": "5ec4cb3e501c670001e49b95",
+                            "extra":{
+                                "weekly_weather" : weekly_weather,
+                                "fest_idx_list" : another_idx
+                            }
+
+                        }
+                    ]
+                }
+            }
+            ]
         }
+    }
 
     return dataSend
-
-
-
+   
 
 
 def restaurant_ui(datalist, restaurant_list):
@@ -276,7 +287,6 @@ def restaurant_ui(datalist, restaurant_list):
         {
             "title": obj['상호명'],
             "description": obj['주소'],
-            # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
             "link": {
                     "web": "daummaps://look?p=" + obj['y'] + "," + obj['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
                 }
@@ -289,7 +299,7 @@ def restaurant_ui(datalist, restaurant_list):
                 {
                 "listCard": {
                     "header": {
-                        "title": "추천 맛집"
+                        "title": "반경 3km 내 추천 맛집"
                     },
                     "items": items_list,
                     "buttons": [
@@ -323,7 +333,6 @@ def cafe_ui(datalist, cafe_list):
             {
                 "title": obj['상호명'],
                 "description": obj['주소'],
-                # "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
                 "link": {
                     "web": "daummaps://look?p=" + obj['y'] + "," + obj['x'] #매뉴얼 상 y좌표가 앞, x좌표가 뒤
                 }
@@ -336,7 +345,7 @@ def cafe_ui(datalist, cafe_list):
                 {
                 "listCard": {
                     "header": {
-                        "title": "추천 카페"
+                        "title": "반경 3km 내 추천 카페"
                     },
                     "items": items_list,
                     "buttons": [
@@ -362,3 +371,97 @@ def cafe_ui(datalist, cafe_list):
         }
     }
     return dataSend
+
+def empty_items_ui(sel): #추천 맛집이나 카페가 없을 때 출력할 function
+    if sel == 'r':
+        text = "반경 3km 이내에 추천맛집이 없습니다"
+    else:
+        text = "반경 3km 이내에 추천카페가 없습니다"
+
+    dataSend = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": text
+                    }
+                }
+            ]
+        }
+    }
+    return dataSend
+
+def popular_festa_ui(fest_list, datalist):
+    items_list = []
+
+    for i in range(len(fest_list[:5])):
+        items_list.append(
+            {
+                "title": datalist[i][0],
+                "description": datalist[i][1],
+                "imageUrl": datalist[i][2]
+            }
+        )
+
+    dataSend = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText" : {
+                        "text" : "*네이버DataLab. 검색어트렌드 기준 순위입니다."
+                    }
+                },
+                {
+                "listCard": {
+                    "header": {
+                        "title": "인기 축제"
+                    },
+                    "items": items_list,
+                    "buttons": [
+                        None if len(fest_list[5:len(fest_list)]) == 0 else {
+                            "label": "더보기",
+                            "action": "block",
+                            "blockId": "5eccb6eb7a9c4b00010632ed",
+                            "extra": {
+                                "another_list" : fest_list[5:len(fest_list)],
+                                "datalist" : datalist[5:len(datalist)]
+                            }
+                        }
+                    ]
+                }
+            }
+            ]
+        }
+    }
+    return dataSend
+
+def word2vec_recommed_ui(title_arr, sim_obj_list):
+    btn_list = []
+    title = ' '.join(title_arr)
+    for v in sim_obj_list:
+        btn = {
+                "label": v['word'],
+                "action": "block",
+                "blockId": "5e4feb4e8192ac00015843f1",
+                 "extra": {
+                     "another_festa_list": v['festa_list'],
+                     "word": title
+                }
+            }
+        btn_list.append(btn)
+    send_data = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": "현재 "+ title +"에 대한 축제는 없나봐😭 조건에맞는 비슷한 것들에 대한 축제는 있는데 이건 어때?"
+                    }
+                }
+            ],
+            "quickReplies": btn_list
+        }
+    }
+    return send_data

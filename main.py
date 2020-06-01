@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from festa_list.festa_description.festa_description import FestaDescription
 from festa_list.festa_list import FestaList
 from option.option_classification import Optionclassification
-from option.kakao_vision_api.kakao_picture_find import picture_find
+from option.kakao_vision_api.google_picture_find import picture_find
 from ui import ui
 from common.DBconncter import DBconncter
 import sys
@@ -56,6 +56,25 @@ def option_cafe_restaurant_more():
         dataSend = ui.cafe_ui(data_list, another_list)
     elif (list_type == "restaurant"):
         dataSend = ui.restaurant_ui(data_list, another_list)
+    return jsonify(dataSend)
+
+@app.route('/option_weather_more', methods=['POST'])
+def option_weather_more():
+    req = request.get_json()
+    weekly_weather = req['action']['clientExtra']['weekly_weather']
+    fest_idx_list = req['action']['clientExtra']['fest_idx_list']
+
+    dataSend = ui.each_weather(weekly_weather, fest_idx_list)
+    return jsonify(dataSend)
+
+@app.route('/option_popular_more', methods=['POST'])
+def option_popular_more():
+    req = request.get_json()
+    another_list = req['action']['clientExtra']['another_list']
+    datalist = req['action']["clientExtra"]["datalist"]
+
+    dataSend = ui.popular_festa_ui(another_list , datalist)
+
     return jsonify(dataSend)
 
 if __name__ == "__main__":

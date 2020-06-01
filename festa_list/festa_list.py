@@ -47,4 +47,4 @@ class FestaList:
         elif tf_idf_checker(self.sentence):
             return FindPurpose(self.sentence).main()
         else:
-            return ui.text_message("축제 정보를 원하는게 아닌거 같은데, 원하는 축제 물어봐줘")
+            return ui.text_message('자유롭게 말해보세요\n예)서울에는 어떤 축제가 열릴까?, 8월에 축제 있어?, 치맥축제 추천해줘')

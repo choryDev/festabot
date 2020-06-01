@@ -41,5 +41,11 @@ class DBconncter:
         conn.commit()
         conn.close()
 
-
+    def insert_query(self, query):
+        conn = pymysql.connect(host=host, user=user,
+                               password=password, db=db, charset='utf8')
+        curs = conn.cursor()
+        curs.execute(query)
+        conn.commit()
+        conn.close()
 

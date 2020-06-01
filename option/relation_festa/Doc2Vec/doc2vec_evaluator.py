@@ -14,9 +14,11 @@ class Doc2VecEvaluator:
 
     def most_similar(self, festa_id, topn=10):
         list = []
-        similar_movies = self.model.docvecs.most_similar(str(festa_id), topn=topn)
+        similar_movies = self.model.docvecs.most_similar(festa_id, topn=topn)
         for festa_id, score in similar_movies:
             obj = {'id': festa_id,
                     'score': score}
             list.append(obj)
+        for sim_festa in list:
+            print(sim_festa)
         return list

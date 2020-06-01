@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from common.DBconncter import DBconncter
 from ui import ui
 
-model = Doc2VecEvaluator('/home/ubuntu/festabot/option/relation_festa/Doc2Vec/model/naver_doc2vec_dataset2020.03.23.model')
+model = Doc2VecEvaluator('/home/ubuntu/festabot/option/relation_festa/Doc2Vec/model/2020.05.29.model')
 
 class RelationOption:
     def __init__(self, requset_obj):

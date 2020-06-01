@@ -41,7 +41,7 @@ class Keyword_extractor:
 
             obj ={
                 "id": self.festa_pk_list[i],
-                'freq_words': arr[:150]
+                'freq_words': arr[:100]
             }
             self.obj.append(obj)
 
