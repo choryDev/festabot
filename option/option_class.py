@@ -120,12 +120,11 @@ class Option:
     def get_popular_festa(self):
         query = 'select * from popular_festa order by save_date desc limit 1'   #크롤링된 인기축제 호출
         data = DBconncter().select_query(query)
-        popular_list = data
-        print('%%%%%%%%%%%%%%%%%%%%%%%%%%popularlist%%%%%%%%%%%%%%%%%%%%%%%%%%\n',popular_list)
-        # popular_list = popular_list[1:]                                         #쓸모없는 첫번째 칼럼 제거
+        popular_list = data[0][1:]                                              #쓸모없는 첫번째 칼럼 삭제
 
-
-        query = 'select title, content, img from festival_tb where title like "%' +str(fest_list[0])    #인기축제10개 쿼리문
+        print(len(popular_list))
+        print(popular_list)
+        query = 'select title, content, img from festival_tb where title like "%' +str(popular_list)    #인기축제10개 쿼리문
         for i in range(1,10):                                                                           #
             query = query + '%" or title like "%' + str(fest_list[i])                                   #
         query = query + '%"'                                                                            #
