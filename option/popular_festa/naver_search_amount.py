@@ -164,6 +164,8 @@ str_fest = ''
 columm = 'save_date'
 for idx, obj in enumerate(result_list):
     columm_nm = idx+1
+    if columm_nm > 40 :
+        break
     columm += ', rank_' +str(columm_nm)
     str_fest += ', '+'"'+str(obj) + '"'
 query = 'insert into popular_festa('+columm+') values("' + str(currentDate) + '"' + str_fest + ')'

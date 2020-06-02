@@ -275,13 +275,13 @@ class FindPurpose:
                 if len(sim_word_list) !=0:
                     for id in sim_word_list:
                         id_query += "id = " + str(id) + " or "
-                        if id_query != '':
-                            exe_temp_query = self.temp_query + " (" + id_query[0:len(id_query) - 3] + ")"
-                            db_obj = DBconncter().select_query(exe_temp_query)
-                            print(db_obj)
-                            if len(db_obj) !=0:
-                                obj ={'word':sim_word, 'festa_list': db_obj}
-                                sim_obj_list.append(obj)
+                    if id_query != '':
+                        exe_temp_query = self.temp_query + " (" + id_query[0:len(id_query) - 3] + ")"
+                        db_obj = DBconncter().select_query(exe_temp_query)
+                        print(len(db_obj))
+                        if len(db_obj) !=0:
+                            obj ={'word':sim_word, 'festa_list': db_obj}
+                            sim_obj_list.append(obj)
         if len(sim_obj_list) == 0:
             return ui.text_message(title + "에 맞는 열릴 축제가 없나봐 ㅠ.ㅠ")
         else:

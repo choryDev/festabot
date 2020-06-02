@@ -38,10 +38,8 @@ class Option:
 
             return ui.address_ui(datalist)
         else:
-            place_list = lo_search.searchAddr(self.usertoken)
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%SEARCH ADDRESS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-            print(place_list)
-            # return ui.
+            title, place_list = lo_search.searchAddr(self.usertoken)
+            return ui.keyword_place_ui(place_list, title)
 
     def get_parkinglot(self): #주차장 조회
         query = 'select region, title, address, getX, getY, img from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
@@ -106,7 +104,7 @@ class Option:
         query = 'select getX, getY from festival_tb where id like ' + str(Option.get_fest_id(self)) + ';'
         data = DBconncter().select_query(query)
         
-        datalist = list(data[0]) 
+        datalist = list(data[0])
 
         cafe_list = get_cafe_list(datalist)
         print("[SERVER] Get %d item(s)" % len(cafe_list))
@@ -120,22 +118,19 @@ class Option:
     def get_popular_festa(self):
         query = 'select * from popular_festa order by save_date desc limit 1'   #크롤링된 인기축제 호출
         data = DBconncter().select_query(query)
-        popular_list = data[0][1:]                                              #쓸모없는 첫번째 칼럼 삭제
+        crawled_list = data[0][1:]                                              #쓸모없는 첫번째 칼럼 삭제
 
-        print(len(popular_list))
-        print(popular_list)
-        query = 'select title, content, img from festival_tb where title like "%' +str(popular_list)    #인기축제10개 쿼리문
-        for i in range(1,10):                                                                           #
-            query = query + '%" or title like "%' + str(fest_list[i])                                   #
-        query = query + '%"'                                                                            #
-
-        data = DBconncter().select_query(query)
-        datalist = list(data)
+        print('%%%%%%%%%%%%%%%%%%%%%%%%crawled_list%%%%%%%%%%%%%%%%%%%%%%%%\n',crawled_list)
+        query = 'select id, title, content, thumbnail, link from festival_tb where title like "%' + str(crawled_list[0])    #인기축제 쿼리문
+        for i in range(1, len(crawled_list)):
+            query = query + '%" or title like "%' + str(crawled_list[i])
+        query = query + '%"'
+        data_list = DBconncter().select_query(query)                            #각 가져오기
         result_list = []
 
-        for title in fest_list: #순서가 바뀐 datalist를 재 sorting하여 result_list에 저장
-            for db_title in datalist:
-                if title == re.sub('[0-9]+', '', db_title[0]):
-                     result_list.append(db_title)
-      
-        return ui.popular_festa_ui(fest_list, result_list)
+        for title in crawled_list: #순서가 바뀐 datalist를 재 sorting하여 result_list에 저장
+            for v in data_list:
+                if title == v[1]:
+                    result_list.append(v)
+
+        return ui.popular_festa_ui(result_list)

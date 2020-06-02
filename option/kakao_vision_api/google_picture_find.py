@@ -53,8 +53,10 @@ def detect_labels_uri(uri):         #사진 객체 찾아 주는 함수
             '{}\nFor more info on error messages, check: '
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
-
-    return eng_to_ko_translt(label_list)
+    if len(labels) == 0 :
+        return 0
+    else:
+        return eng_to_ko_translt(label_list)
 
 def word_pupose(word):
     festa_list = []
@@ -69,13 +71,18 @@ def word_pupose(word):
     return [a['id'] for a in festa_list] #아이디만 뽑아 냄
 
 def picture_find(utterance):
-    pic_label_list = detect_labels_uri(utterance)
+    ui_context = None
+    result = detect_labels_uri(utterance)
+
+    if result == 0:
+        return ui.text_message("사진에 맞는 축제 못찾겠어")
+    else:
+        pic_label_list = result
     pic_label_list = pic_label_list.split('!')
     for a in pic_label_list:
         print(a)
     id_list = []
     title = ""
-    ui_context = None
 
     for pic_obj in pic_label_list:
         id_list += word_pupose(pic_obj)
@@ -86,7 +93,10 @@ def picture_find(utterance):
             query += "id = " + str(id) + " or "
         print(query)
         db_obj = DBconncter().select_query(query[0:len(query)-3])
-        ui_context = ui.festa_list_ui(db_obj[0:5], db_obj[5:], title[0:len(title) - 1])
+        if len(db_obj) == 0:
+            ui_context = ui.text_message("사진에 맞는 축제 못찾겠어")
+        else:
+            ui_context = ui.festa_list_ui(db_obj[0:5], db_obj[5:], title[0:len(title) - 1])
     else:
         ui_context = ui.text_message("사진에 맞는 축제 못찾겠어")
 

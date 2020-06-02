@@ -1,6 +1,3 @@
-# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
-# For example, here's several helpful packages to load
-
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import numpy as np
@@ -19,11 +16,10 @@ from keras.callbacks import EarlyStopping
 from keras.layers import Dropout
 import re
 
-MAXLEN = 30
-NUM_WORDS = 300
+MAXLEN = 8
+NUM_WORDS = 258
 
 df=pd.read_csv("./category_sentence.csv", delimiter=',', encoding='utf-8')
-#df = df.sample(frac=1).reset_index(drop=True) #열 섞기
 
 df.dtypes
 
@@ -144,5 +140,3 @@ padded = pad_sequences(seq, maxlen=MAXLEN)
 pred = model.predict(padded)
 labels = ['날씨', '맛집', '연관', '인기', '주소', '주차', '카페']
 print(pred, labels[np.argmax(pred)])
-
-

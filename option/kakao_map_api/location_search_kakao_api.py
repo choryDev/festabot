@@ -3,7 +3,7 @@ import requests
 import json
 import pymysql
 
-stopword = ['주변','주소','축제', '어디', '위치', '어딘', '말', '저기', '야', '페스타봇', '헤이','그럼','난', '임', '누', '금방', '인근', '근처']
+stopword = ['거기','길','상세','주변','주소','축제', '어디', '위치', '어딘', '말', '저기', '야', '페스타봇', '헤이','그럼','난', '임', '누', '금방', '인근', '근처']
 
 class Location_search_kakaomap_api:
 
@@ -23,7 +23,6 @@ class Location_search_kakaomap_api:
     def searchAddr(self, user):
         x, y= self.joinData(user)
         sentence = [' '+a for a in self.token_sentence]
-        print(sentence)
 
         url = "https://dapi.kakao.com/v2/local/search/keyword.json?x=" + str(y) + "&y=" + str(x) + "&radius=5000" #radius는 미터단위
         apikey = "5e5acc55c8584f36abffe26633c82550"
@@ -32,10 +31,17 @@ class Location_search_kakaomap_api:
         r = requests.get( url, params = {'query':query}, headers={'Authorization' : 'KakaoAK ' + apikey })
 
         place_list = [] #호출된 데이터 dict형태로 만들어 array로 저장
-        for i in range(len(r.json()["documents"])):
-            place_list.append( {'상호명' : r.json()["documents"][i]['place_name'], '주소' : r.json()["documents"][i]['address_name']} )
+        obj_list = r.json()["documents"]
+        for v in obj_list:
+            print(v)
+            place_list.append( {
+                '상호명' : v['place_name'],
+                '주소' : v['address_name'],
+                'x' : v['x'],
+                'y' : v['y'],
+                'url' : v['place_url']})
 
-        return place_list
+        return ' '.join(sentence), place_list
         #[msg for msg in self.tokenizer(msg) if msg in msg]
 
     #db에서 현재 선택한 축제의 지역명 가져오기
